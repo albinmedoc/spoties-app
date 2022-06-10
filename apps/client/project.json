@@ -1,78 +1,22 @@
 {
   "$schema": "../../node_modules/nx/schemas/project-schema.json",
-  "sourceRoot": "apps/client/src",
   "projectType": "application",
+  "sourceRoot": "apps/client/src",
   "targets": {
     "build": {
-      "executor": "@nrwl/web:webpack",
-      "outputs": ["{options.outputPath}"],
-      "defaultConfiguration": "production",
+      "executor": "@wanews/nx-vite:build",
       "options": {
-        "compiler": "babel",
-        "outputPath": "dist/apps/client",
-        "index": "apps/client/src/index.html",
-        "baseHref": "/",
-        "main": "apps/client/src/main.tsx",
-        "polyfills": "apps/client/src/polyfills.ts",
-        "tsConfig": "apps/client/tsconfig.app.json",
-        "assets": ["apps/client/src/favicon.ico", "apps/client/src/assets"],
-        "styles": ["apps/client/src/styles.css"],
-        "scripts": [],
-        "webpackConfig": "@nrwl/react/plugins/webpack"
-      },
-      "configurations": {
-        "development": {
-          "extractLicenses": false,
-          "optimization": false,
-          "sourceMap": true,
-          "vendorChunk": true
-        },
-        "production": {
-          "fileReplacements": [
-            {
-              "replace": "apps/client/src/environments/environment.ts",
-              "with": "apps/client/src/environments/environment.prod.ts"
-            }
-          ],
-          "optimization": true,
-          "outputHashing": "all",
-          "sourceMap": false,
-          "namedChunks": false,
-          "extractLicenses": true,
-          "vendorChunk": false
-        }
+        "tsConfig": "apps/client/tsconfig.json"
       }
     },
     "serve": {
-      "executor": "@nrwl/web:dev-server",
-      "defaultConfiguration": "development",
-      "options": {
-        "buildTarget": "client:build",
-        "hmr": true
-      },
-      "configurations": {
-        "development": {
-          "buildTarget": "client:build:development"
-        },
-        "production": {
-          "buildTarget": "client:build:production",
-          "hmr": false
-        }
-      }
+      "executor": "@wanews/nx-vite:serve",
+      "options": {}
     },
     "lint": {
       "executor": "@nrwl/linter:eslint",
-      "outputs": ["{options.outputFile}"],
       "options": {
-        "lintFilePatterns": ["apps/client/**/*.{ts,tsx,js,jsx}"]
-      }
-    },
-    "test": {
-      "executor": "@nrwl/jest:jest",
-      "outputs": ["coverage/apps/client"],
-      "options": {
-        "jestConfig": "apps/client/jest.config.ts",
-        "passWithNoTests": true
+        "lintFilePatterns": ["apps/client/**/*.ts"]
       }
     }
   },

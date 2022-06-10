@@ -1,7 +1,7 @@
 {
   "compileOnSave": false,
   "compilerOptions": {
-    "rootDir": ".",
+    "rootDir": "./",
     "sourceMap": true,
     "declaration": false,
     "moduleResolution": "node",
@@ -13,8 +13,12 @@
     "lib": ["es2017", "dom"],
     "skipLibCheck": true,
     "skipDefaultLibCheck": true,
-    "baseUrl": ".",
-    "paths": {}
+    "baseUrl": "./",
+    "esModuleInterop": true,
+    "paths": {
+      "@client/*": ["apps/client/src/*"],
+      "@backend/*": ["apps/backend/src/*"]
+    }
   },
   "exclude": ["node_modules", "tmp"]
 }

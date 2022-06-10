@@ -1,5 +1,9 @@
 # See http://help.github.com/ignore-files/ for more about ignoring files.
 
+# Environment Configuration
+.env
+.env.test
+
 # compiled output
 /dist
 /tmp
@@ -37,3 +41,7 @@ testem.log
 # System Files
 .DS_Store
 Thumbs.db
+
+# Logs
+logs
+*.log
