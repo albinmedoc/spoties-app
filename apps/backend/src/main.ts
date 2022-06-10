@@ -15,8 +15,6 @@ const TOP_LEVEL_OAUTH_COOKIE = "shopify_top_level_oauth";
 
 const PORT = parseInt(process.env.PORT || "8081", 10);
 const isTest = process.env.NODE_ENV === "test" || !!process.env.VITE_TEST_BUILD;
-console.log('NODE_ENV', process.env.NODE_ENV);
-console.log('isTest', isTest);
 
 Shopify.Context.initialize({
   API_KEY: process.env.SHOPIFY_API_KEY,
@@ -42,10 +40,9 @@ Shopify.Webhooks.Registry.addHandler("APP_UNINSTALLED", {
 // export for test use only
 export async function createServer(
   root = resolve(process.cwd(), 'apps/client'),
-  configFile: string = null,
+  configFile = resolve(process.cwd(), 'apps/client/vite.config.js'),
   isProd = process.env.NODE_ENV === "production"
 ) {
-  console.log('isProd', isProd);
 
   const app = express();
   app.set("top-level-oauth-cookie", TOP_LEVEL_OAUTH_COOKIE);
@@ -117,7 +114,7 @@ export async function createServer(
     vite = await import("vite").then(({ createServer }) =>
       createServer({
         root,
-        configFile: configFile ?? resolve(process.cwd(), 'apps/client/vite.config.js'),
+        configFile,
         logLevel: isTest ? "error" : "info",
         server: {
           port: PORT,

@@ -6,6 +6,7 @@
   "scripts": {
     "serve": "nx serve backend",
     "build": "nx build client && nx build backend",
+    "heroku-postbuild": "nx build client --prod && nx build backend --prod",
     "tunnel": "lt --subdomain spoties-app --port 8081",
     "start": "node ."
   },
