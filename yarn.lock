@@ -2112,9 +2112,9 @@
   integrity sha512-PTozhV8U56rrAtSEu4lbebka3tFX/ty7UcmlRmZKxo9eluuiJPNdcsQZzNXyqIBdYIxjdd30PTwed+OCboFNfg==
 
 "@shopify/polaris-tokens@*":
-  version "5.2.1"
-  resolved "https://registry.yarnpkg.com/@shopify/polaris-tokens/-/polaris-tokens-5.2.1.tgz#d288c1551983a96d66e7165058a822004706e8f0"
-  integrity sha512-xa+UussENiJ8TP6eCebf9pqoRmUg8tP9sWDGql8+2RujjiRcPNjgwDFvDM7e23FFqu4+aJdZqEFqUpQz0g8qcA==
+  version "5.1.1"
+  resolved "https://registry.yarnpkg.com/@shopify/polaris-tokens/-/polaris-tokens-5.1.1.tgz#ec854d25d612607b7bc714865e5b3d9fe43f02c7"
+  integrity sha512-Hk7sy8Zz2a0C37JnvNU7Yd85nI79WkNsmFS6UYhgIZMC2YaSCpVQy/ZDg0t7OqUV7Im+7i9Hb/D9MQ2c7OEXnQ==
 
 "@shopify/polaris@^9.7.0":
   version "9.14.1"
@@ -4376,9 +4376,9 @@ cross-spawn@^7.0.0, cross-spawn@^7.0.2, cross-spawn@^7.0.3:
     which "^2.0.1"
 
 css-declaration-sorter@^6.2.2:
-  version "6.3.0"
-  resolved "https://registry.yarnpkg.com/css-declaration-sorter/-/css-declaration-sorter-6.3.0.tgz#72ebd995c8f4532ff0036631f7365cce9759df14"
-  integrity sha512-OGT677UGHJTAVMRhPO+HJ4oKln3wkBTwtDFH0ojbqm+MJm6xuDMHp2nkhh/ThaBqq20IbraBQSWKfSLNHQO9Og==
+  version "6.2.2"
+  resolved "https://registry.yarnpkg.com/css-declaration-sorter/-/css-declaration-sorter-6.2.2.tgz#bfd2f6f50002d6a3ae779a87d3a0c5d5b10e0f02"
+  integrity sha512-Ufadglr88ZLsrvS11gjeu/40Lw74D9Am/Jpr3LlYm5Q4ZP5KdlUhG+6u2EjyXeZcxmZ2h1ebCKngDjolpeLHpg==
 
 css-loader@^6.4.0:
   version "6.7.1"
@@ -4864,9 +4864,9 @@ ejs@^3.1.7:
     jake "^10.8.5"
 
 electron-to-chromium@^1.4.147:
-  version "1.4.151"
-  resolved "https://registry.yarnpkg.com/electron-to-chromium/-/electron-to-chromium-1.4.151.tgz#d1c09dd3a06cb81ef03a3bbbff6905827c33ab4b"
-  integrity sha512-XaG2LpZi9fdiWYOqJh0dJy4SlVywCvpgYXhzOlZTp4JqSKqxn5URqOjbm9OMYB3aInA2GuHQiem1QUOc1yT0Pw==
+  version "1.4.150"
+  resolved "https://registry.yarnpkg.com/electron-to-chromium/-/electron-to-chromium-1.4.150.tgz#89f0e12505462d5df7e56c5b91aff7e1dfdd33ec"
+  integrity sha512-MP3oBer0X7ZeS9GJ0H6lmkn561UxiwOIY9TTkdxVY7lI9G6GVCKfgJaHaDcakwdKxBXA4T3ybeswH/WBIN/KTA==
 
 emittery@^0.10.2:
   version "0.10.2"
@@ -10662,7 +10662,7 @@ test-exclude@^6.0.0:
 text-table@^0.2.0:
   version "0.2.0"
   resolved "https://registry.yarnpkg.com/text-table/-/text-table-0.2.0.tgz#7f5ee823ae805207c00af2df4a84ec3fcfa570b4"
-  integrity sha512-N+8UisAXDGk8PFXP4HAzVR9nbfmVJ3zYLAWiTIoqC5v5isinhr+r5uaO8+7r3BMfuNIufIsA7RdpVgacC2cSpw==
+  integrity sha1-f17oI66AUgfACvLfSoTsP8+lcLQ=
 
 throat@^6.0.1:
   version "6.0.1"
@@ -10672,12 +10672,12 @@ throat@^6.0.1:
 throttleit@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/throttleit/-/throttleit-1.0.0.tgz#9e785836daf46743145a5984b6268d828528ac6c"
-  integrity sha512-rkTVqu6IjfQ/6+uNuuc3sZek4CEYxTJom3IktzgdSxcZqdARuebbA/f4QmAxMQIxqq9ZLEUkSYqvuk1I6VKq4g==
+  integrity sha1-nnhYNtr0Z0MUWlmEtiaNgoUorGw=
 
 through@^2.3.8:
   version "2.3.8"
   resolved "https://registry.yarnpkg.com/through/-/through-2.3.8.tgz#0dd4c9ffaabc357960b1b724115d7e0e86a2e1f5"
-  integrity sha512-w89qg7PI8wAdvX60bMDP+bFoD5Dvhm9oLheFp5O4a2QF0cSBGsBX4qZmadPMvVqlLJBBci+WqGGOAPvcDeNSVg==
+  integrity sha1-DdTJ/6q8NXlgsbckEV1+Doai4fU=
 
 thunky@^1.0.2:
   version "1.1.0"
@@ -10699,7 +10699,7 @@ tmpl@1.0.5:
 to-fast-properties@^2.0.0:
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/to-fast-properties/-/to-fast-properties-2.0.0.tgz#dc5e698cbd079265bc73e0377681a4e4e83f616e"
-  integrity sha512-/OaKK0xYrs3DmxRYqL/yDc+FxFUVYhDlXMhRmv3z915w2HF1tnN1omB354j8VUGO/hbRzyD6Y3sA7v7GS/ceog==
+  integrity sha1-3F5pjL0HkmW8c+A3doGk5Og/YW4=
 
 to-regex-range@^5.0.1:
   version "5.0.1"
@@ -11095,9 +11095,9 @@ verror@1.10.0:
     extsprintf "^1.2.0"
 
 vite@^2.9.11:
-  version "2.9.11"
-  resolved "https://registry.yarnpkg.com/vite/-/vite-2.9.11.tgz#59a5a25fe40a4dcddc1ad3c348f4f0d8031ff926"
-  integrity sha512-h1n8bAN5Psv/V+RAY3P6OtYyGSFQdusgYWiLRAk41qY7rSyH4K5Jq+RUXztzyPVB0oHbnXPUuS2Aj44jucViUA==
+  version "2.9.12"
+  resolved "https://registry.yarnpkg.com/vite/-/vite-2.9.12.tgz#b1d636b0a8ac636afe9d83e3792d4895509a941b"
+  integrity sha512-suxC36dQo9Rq1qMB2qiRorNJtJAdxguu5TMvBHOc/F370KvqAe9t48vYp+/TbPKRNrMh/J55tOUmkuIqstZaew==
   dependencies:
     esbuild "^0.14.27"
     postcss "^8.4.13"
@@ -11403,9 +11403,9 @@ ws@^7.4.6:
   integrity sha512-ri1Id1WinAX5Jqn9HejiGb8crfRio0Qgu8+MtL36rlTA6RLsMdWt1Az/19A2Qij6uSHUMphEFaTKa4WG+UNHNw==
 
 ws@^8.4.2:
-  version "8.8.0"
-  resolved "https://registry.yarnpkg.com/ws/-/ws-8.8.0.tgz#8e71c75e2f6348dbf8d78005107297056cb77769"
-  integrity sha512-JDAgSYQ1ksuwqfChJusw1LSJ8BizJ2e/vVu5Lxjq3YvNJNlROv1ui4i+c/kUUrPheBvQl4c5UbERhTwKa6QBJQ==
+  version "8.7.0"
+  resolved "https://registry.yarnpkg.com/ws/-/ws-8.7.0.tgz#eaf9d874b433aa00c0e0d8752532444875db3957"
+  integrity sha512-c2gsP0PRwcLFzUiA8Mkr37/MI7ilIlHQxaEAtd0uNMbVMoy8puJyafRlm0bV9MbGSabUPeLrRRaqIBcFcA2Pqg==
 
 xml-name-validator@^3.0.0:
   version "3.0.0"

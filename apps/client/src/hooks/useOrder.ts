@@ -2,14 +2,15 @@ import { useQuery } from "@apollo/react-hooks";
 import { useMemo } from "react";
 import { GET_ORDER_QUERY } from "@client/graphql";
 import { getNodesFromConnections } from "@client/utilities/graphql";
+import type { QueryOrder, Order } from '@types';
 
 export const useOrder = ({ id = null, maxProducts = 10 } = {}) => {
-  const { data, loading } = useQuery(GET_ORDER_QUERY, {
+  const { data, loading } = useQuery<{ order: QueryOrder }>(GET_ORDER_QUERY, {
     variables: { id, maxProducts },
     fetchPolicy: "network-only",
   });
 
-  const order = useMemo(() => {
+  const order: Order = useMemo(() => {
     if (!data) {
       return null;
     }
@@ -19,6 +20,7 @@ export const useOrder = ({ id = null, maxProducts = 10 } = {}) => {
       products: getNodesFromConnections(data.order.lineItems).map(
         (product) => ({
           ...product,
+          quantity: product.currentQuantity,
           variant: product.variant?.title,
         })
       ),

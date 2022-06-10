@@ -13,7 +13,11 @@ export const GET_ORDER_QUERY = gql`
         firstName
         lastName
       }
-      totalPrice
+      currentSubtotalPriceSet {
+        shopMoney {
+          amount
+        }
+      }
       lineItems(first: $maxProducts) {
         edges {
           node {
@@ -22,7 +26,7 @@ export const GET_ORDER_QUERY = gql`
             variant {
               title
             }
-            quantity
+            currentQuantity
             image {
               altText
               url

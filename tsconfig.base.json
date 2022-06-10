@@ -16,8 +16,9 @@
     "baseUrl": "./",
     "esModuleInterop": true,
     "paths": {
+      "@backend/*": ["apps/backend/src/*"],
       "@client/*": ["apps/client/src/*"],
-      "@backend/*": ["apps/backend/src/*"]
+      "@types": ["libs/types/src/index.d.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]

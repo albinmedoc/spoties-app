@@ -9,8 +9,8 @@ interface TagsProp {
 }
 
 export function Tags(props: TagsProp) {
-  const [selectedTags, setSelectedTags] = useState(props.selectedTags);
-  const [suggestedTags, setSuggestedTags] = useLocalStorage(
+  const [selectedTags, setSelectedTags]  = useState(props.selectedTags);
+  const [suggestedTags, setSuggestedTags] = useLocalStorage<string[]>(
     "suggested_tags",
     []
   );
@@ -20,7 +20,7 @@ export function Tags(props: TagsProp) {
     Array.from(new Set(arr));
 
   const updateSelection = useCallback(
-    (selected) => {
+    (selected: string) => {
       const nextSelectedTags = new Set([...selectedTags]);
       if (nextSelectedTags.has(selected)) {
         nextSelectedTags.delete(selected);
@@ -36,11 +36,11 @@ export function Tags(props: TagsProp) {
       setSuggestedTags(Array.from(nextSelectedTags));
       setValue("");
     },
-    [selectedTags]
+    [props, setSuggestedTags, suggestedTags, selectedTags]
   );
 
   const removeTag = useCallback(
-    (tag) => () => {
+    (tag: string) => () => {
       updateSelection(tag);
     },
     [updateSelection]
@@ -73,7 +73,7 @@ export function Tags(props: TagsProp) {
   );
 
   const options = useMemo(() => {
-    let list;
+    let list: string[];
     const allTags = getAllTags();
     const filterRegex = new RegExp(value, "i");
 

@@ -1,7 +1,12 @@
 import { Card, Thumbnail, Badge, TextStyle } from "@shopify/polaris";
 import { isValidUrl } from "@client/helpers";
+import type { Product } from '@types';
 
-export function ProductCard(props) {
+interface ProductCardProps {
+  product: Product;
+}
+
+export function ProductCard(props: ProductCardProps) {
   const variantMarkup = props.product.variant ? (
     <p>
       <TextStyle variation="subdued">Variant: </TextStyle>
@@ -11,22 +16,16 @@ export function ProductCard(props) {
 
   const customAttributesMarkup = props.product.customAttributes.map(
     (customAttribute) => {
-      let value = customAttribute.value;
-
-      if (isValidUrl(value)) {
-        value = (
-          <Thumbnail
-            source={value}
-            alt={customAttribute.key}
-            size="medium"
-          />
-        );
-      }
+      const value = customAttribute.value;
 
       return (
         <p key={customAttribute.key}>
           <TextStyle variation="subdued">{customAttribute.key}: </TextStyle>
-          {value}
+          {!isValidUrl(value) ? value: <Thumbnail
+            source={value}
+            alt={customAttribute.key}
+            size="medium"
+          />}
         </p>
       );
     }
@@ -35,7 +34,7 @@ export function ProductCard(props) {
   return (
     <Card>
       <div>
-        <Badge>{props.product.quantity}</Badge>
+        <Badge>{props.product.quantity.toString()}</Badge>
         <Thumbnail
           source={props.product.image?.url}
           alt={props.product.image?.altText}
@@ -43,7 +42,7 @@ export function ProductCard(props) {
         />
       </div>
       <div>
-        <h2>{props.product.name}</h2>
+        <h2>{props.product.title}</h2>
         {variantMarkup}
         {customAttributesMarkup}
       </div>

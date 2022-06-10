@@ -1,10 +1,13 @@
 import { useMemo } from "react";
 import { Badge } from "@shopify/polaris";
+import type { Order } from '@types';
 
-type Status = "success" | "attention" | "info";
+interface OrderStatusBadgeProps {
+  order: Order;
+}
 
-export function OrderStatusBadge(props) {
-  const status = useMemo((): { title: string; color: Status } => {
+export function OrderStatusBadge(props: OrderStatusBadgeProps) {
+  const status = useMemo((): { title: string; color?: "success" | "attention" | "info"  } => {
     const order = props.order;
     if (order.displayFulfillmentStatus === "FULFILLED") {
       return { title: "Fulfilled", color: "success" };
