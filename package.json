@@ -2,7 +2,7 @@
   "name": "spoties-app",
   "version": "0.0.0",
   "license": "MIT",
-  "main": "dist/apps/backend/main.js",
+  "main": "dist/backend/main.js",
   "scripts": {
     "serve": "nx serve backend",
     "build": "nx build client && nx build backend",
