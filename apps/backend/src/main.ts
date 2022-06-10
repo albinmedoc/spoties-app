@@ -44,6 +44,7 @@ export async function createServer(
   configFile: string = null,
   isProd = process.env.NODE_ENV === "production"
 ) {
+  console.log('isProd', isProd);
 
   const app = express();
   app.set("top-level-oauth-cookie", TOP_LEVEL_OAUTH_COOKIE);
