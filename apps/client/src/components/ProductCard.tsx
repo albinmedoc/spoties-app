@@ -6,15 +6,17 @@ interface ProductCardProps {
   product: Product;
 }
 
-export function ProductCard(props: ProductCardProps) {
-  const variantMarkup = props.product.variant ? (
+export default function ProductCard(props: ProductCardProps) {
+  const { product } = props;
+
+  const variantMarkup = product.variant ? (
     <p>
       <TextStyle variation="subdued">Variant: </TextStyle>
-      {props.product.variant}
+      {product.variant}
     </p>
   ) : null;
 
-  const customAttributesMarkup = props.product.customAttributes.map(
+  const customAttributesMarkup = product.customAttributes.map(
     (customAttribute) => {
       const value = customAttribute.value;
 
@@ -34,15 +36,15 @@ export function ProductCard(props: ProductCardProps) {
   return (
     <Card>
       <div>
-        <Badge>{props.product.quantity.toString()}</Badge>
+        <Badge>{product.quantity.toString()}</Badge>
         <Thumbnail
-          source={props.product.image?.url}
-          alt={props.product.image?.altText}
+          source={product.image?.url}
+          alt={product.image?.altText}
           size="small"
         />
       </div>
       <div>
-        <h2>{props.product.title}</h2>
+        <h2>{product.title}</h2>
         {variantMarkup}
         {customAttributesMarkup}
       </div>

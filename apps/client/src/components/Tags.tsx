@@ -1,6 +1,5 @@
 import { useCallback, useMemo, useState } from "react";
-import { Combobox, Listbox, Stack, Tag, TextStyle } from "@shopify/polaris";
-import { AutoSelection } from "@shopify/polaris";
+import { Combobox, Listbox, Stack, Tag, TextStyle, AutoSelection } from "@shopify/polaris";
 import { useLocalStorage } from "@client/hooks";
 
 interface TagsProp {
@@ -8,7 +7,7 @@ interface TagsProp {
   updateTags: (arr: Array<string>) => void;
 }
 
-export function Tags(props: TagsProp) {
+export default function Tags(props: TagsProp) {
   const [selectedTags, setSelectedTags]  = useState(props.selectedTags);
   const [suggestedTags, setSuggestedTags] = useLocalStorage<string[]>(
     "suggested_tags",
@@ -46,12 +45,11 @@ export function Tags(props: TagsProp) {
     [updateSelection]
   );
 
-  const getAllTags = useCallback(() => {
-    return removeDuplicates<string>([...suggestedTags, ...selectedTags]).sort();
-  }, [suggestedTags, selectedTags]);
+  const getAllTags = useCallback(() => removeDuplicates<string>([...suggestedTags, ...selectedTags]).sort()
+  , [suggestedTags, selectedTags]);
 
   const formatOptionText = useCallback(
-    (option) => {
+    (option: string) => {
       const trimValue = value.trim().toLocaleLowerCase();
       const matchIndex = option.toLocaleLowerCase().indexOf(trimValue);
 
@@ -99,8 +97,7 @@ export function Tags(props: TagsProp) {
 
   const optionMarkup =
     options.length > 0
-      ? options.map((option) => {
-          return (
+      ? options.map((option) =>
             <Listbox.Option
               key={option}
               value={option}
@@ -111,8 +108,7 @@ export function Tags(props: TagsProp) {
                 {formatOptionText(option)}
               </Listbox.TextOption>
             </Listbox.Option>
-          );
-        })
+        )
       : null;
 
   const noResults = value && !getAllTags().includes(value);

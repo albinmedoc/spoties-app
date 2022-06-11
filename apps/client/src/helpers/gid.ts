@@ -6,10 +6,6 @@ function generateShopifyGid(entityType, value) {
   return `gid://shopify/${entityType}/${value}`;
 }
 
-export const generateShopifyProductGid = (value) => {
-  return generateShopifyGid("Product", value);
-};
+export const generateShopifyProductGid = (value) => generateShopifyGid("Product", value);
 
-export const generateShopifyOrderGid = (value) => {
-  return generateShopifyGid("Order", value);
-};
+export const generateShopifyOrderGid = (value) => generateShopifyGid("Order", value);

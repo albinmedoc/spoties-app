@@ -1,6 +1,6 @@
 import { gql } from "@apollo/client";
 
-export const UPDATE_ORDER_QUERY = gql`
+const UPDATE_ORDER_QUERY = gql`
   mutation orderUpdate($input: OrderInput!) {
     orderUpdate(input: $input) {
       userErrors {
@@ -10,3 +10,5 @@ export const UPDATE_ORDER_QUERY = gql`
     }
   }
 `;
+
+export default UPDATE_ORDER_QUERY;

@@ -1,6 +1,6 @@
 import { gql } from "@apollo/client";
 
-export const GET_ORDER_QUERY = gql`
+const GET_ORDER_QUERY = gql`
   query GetOrders($id: ID!, $maxProducts: Int) {
     order(id: $id) {
       id
@@ -48,3 +48,5 @@ export const GET_ORDER_QUERY = gql`
     }
   }
 `;
+
+export default GET_ORDER_QUERY;

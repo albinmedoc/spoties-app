@@ -1,18 +1,21 @@
 import { Routes, Route } from "react-router-dom";
-import { HomePage } from "@client/routes/HomePage";
-import { OrdersOverview } from "@client/routes/OrdersOverview";
-import { OrderDetails } from "@client/routes/OrderDetails";
+import HomePage from "@client/routes/HomePage";
+import OrdersOverview from "@client/routes/OrdersOverview";
+import OrderDetails from "@client/routes/OrderDetails";
 
 const routes = [
   {
+    id: "home",
     path: "/",
     element: <HomePage />,
   },
   {
+    id: "ordersOverview",
     path: "/orders",
     element: <OrdersOverview />,
   },
   {
+    id: "orderDetails",
     path: "/orders/:id",
     element: <OrderDetails />,
   },
@@ -21,8 +24,8 @@ const routes = [
 export default function Router() {
   return (
     <Routes>
-      {routes.map((route, i) => (
-        <Route key={i} {...route} />
+      {routes.map((route) => (
+        <Route key={route.id} path={route.path} element={route.element} />
       ))}
     </Routes>
   );

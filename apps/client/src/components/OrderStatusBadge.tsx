@@ -6,7 +6,7 @@ interface OrderStatusBadgeProps {
   order: Order;
 }
 
-export function OrderStatusBadge(props: OrderStatusBadgeProps) {
+export default function OrderStatusBadge(props: OrderStatusBadgeProps) {
   const status = useMemo((): { title: string; color?: "success" | "attention" | "info"  } => {
     const order = props.order;
     if (order.displayFulfillmentStatus === "FULFILLED") {

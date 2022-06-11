@@ -4,7 +4,7 @@ import { useOrder, useOrderUpdate } from "@client/hooks";
 import { generateShopifyOrderGid } from "@client/helpers";
 import { OrderStatusBadge, ProductCard, Tags } from "@client/components";
 
-export function OrderDetails() {
+export default function OrderDetails() {
   const { id } = useParams();
   const { order, loading: orderLoading } = useOrder({
     id: generateShopifyOrderGid(id),
@@ -16,7 +16,7 @@ export function OrderDetails() {
     return <Spinner accessibilityLabel="Loading order" />;
   }
 
-  const updateTags = (tags) => {
+  const updateTags = (tags: string[]) => {
     updateOrder({ id: order.id, tags });
   };
 

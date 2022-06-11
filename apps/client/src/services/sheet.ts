@@ -1,6 +1,8 @@
+import type { AppBridgeState, ClientApplication } from "@shopify/app-bridge";
 import { userLoggedInFetch } from "@client/helpers";
+import { Order } from "@types";
 
-const fetchOrders = (app, orders, responseType) => {
+const fetchOrders = (app: ClientApplication<AppBridgeState>, orders: Order[], responseType: string) => {
   const fetch = userLoggedInFetch(app);
 
   return fetch("/sheet/orders", {
@@ -13,9 +15,9 @@ const fetchOrders = (app, orders, responseType) => {
   });
 };
 
-const fetchOrdersCSV = (app, orders) => fetchOrders(app, orders, "text/csv");
+const fetchOrdersCSV = (app: ClientApplication<AppBridgeState>, orders: Order[]) => fetchOrders(app, orders, "text/csv");
 
-const fetchOrdersExcel = (app, orders) =>
+const fetchOrdersExcel = (app: ClientApplication<AppBridgeState>, orders: Order[]) =>
   fetchOrders(app, orders, "application/vnd.ms-excel");
 
 export { fetchOrdersCSV, fetchOrdersExcel };

@@ -1,6 +1,6 @@
 import { gql } from "@apollo/client";
 
-export const GET_ORDERS_QUERY = gql`
+const GET_ORDERS_QUERY = gql`
   query GetOrders($query: String, $maxOrders: Int, $maxProducts: Int) {
     orders(
       first: $maxOrders
@@ -20,7 +20,11 @@ export const GET_ORDERS_QUERY = gql`
             firstName
             lastName
           }
-          totalPrice
+          currentSubtotalPriceSet {
+            shopMoney {
+              amount
+            }
+          }
           lineItems(first: $maxProducts) {
             edges {
               node {
@@ -28,7 +32,7 @@ export const GET_ORDERS_QUERY = gql`
                 variant {
                   title
                 }
-                quantity
+                currentQuantity
                 image {
                   altText
                   url
@@ -58,3 +62,5 @@ export const GET_ORDERS_QUERY = gql`
     }
   }
 `;
+
+export default GET_ORDERS_QUERY;

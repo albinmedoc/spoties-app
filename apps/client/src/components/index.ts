@@ -1,3 +1,5 @@
-export { OrderStatusBadge } from "./OrderStatusBadge";
-export { ProductCard } from "./ProductCard";
-export { Tags } from "./Tags";
+import OrderStatusBadge from "./OrderStatusBadge";
+import ProductCard from "./ProductCard";
+import Tags from "./Tags";
+
+export { OrderStatusBadge, ProductCard, Tags };

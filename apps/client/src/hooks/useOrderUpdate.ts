@@ -1,12 +1,13 @@
 import { useMutation } from "@apollo/react-hooks";
 import { useCallback } from "react";
 import { UPDATE_ORDER_QUERY } from "@client/graphql";
+import type { QueryOrder } from "@types";
 
-export const useOrderUpdate = () => {
+const useOrderUpdate = () => {
   const [updateOrderMutation] = useMutation(UPDATE_ORDER_QUERY);
 
   return useCallback(
-    async (input) => {
+    async (input: Partial<QueryOrder>) => {
       const mutationResult = await updateOrderMutation({
         variables: { input },
         fetchPolicy: "network-only",
@@ -23,3 +24,5 @@ export const useOrderUpdate = () => {
     [updateOrderMutation]
   );
 };
+
+export default useOrderUpdate;

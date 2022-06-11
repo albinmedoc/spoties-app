@@ -17,8 +17,9 @@ import { extractIdFromGid } from "@client/helpers";
 import { OrderStatusBadge } from "@client/components";
 import type { NonEmptyArray } from "@shopify/polaris/build/ts/latest/src/types";
 import type { IndexTableHeading } from "@shopify/polaris/build/ts/latest/src/components/IndexTable";
+import { Order } from "@types";
 
-export function OrdersOverview() {
+export default function OrdersOverview() {
   const queries = [
     {
       id: "unhandled",
@@ -38,7 +39,7 @@ export function OrdersOverview() {
   const [queryId, setQueryId] = useState(queries[0].id);
 
   const handleQueryChange = useCallback(
-    (_checked, queryId) => setQueryId(queryId),
+    (_checked: boolean, id: string) => setQueryId(id),
     []
   );
 
@@ -70,7 +71,7 @@ export function OrdersOverview() {
     return selectedResources.map((orderId) =>
       orders.find((order) => order.id === orderId)
     );
-  }, [selectedResources]);
+  }, [selectedResources, orders]);
 
   const app = useAppBridge();
 
@@ -84,7 +85,7 @@ export function OrdersOverview() {
             fetchOrdersCSV(app, selectedOrders)
               .then((res) => res.blob())
               .then((blob) => saveAs(blob, "Test.csv"))
-              .catch((err) => console.log(err));
+              .catch((err) => console.error(err));
           },
         },
         {
@@ -93,7 +94,7 @@ export function OrdersOverview() {
             fetchOrdersExcel(app, selectedOrders)
               .then((res) => res.blob())
               .then((blob) => saveAs(blob, "Test.xlsx"))
-              .catch((err) => console.log(err));
+              .catch((err) => console.error(err));
           },
         },
       ],

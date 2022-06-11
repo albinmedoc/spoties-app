@@ -1,1 +1,3 @@
-export { getNodesFromConnections } from "./connections";
+import getNodesFromConnections from "./connections";
+
+export { getNodesFromConnections }

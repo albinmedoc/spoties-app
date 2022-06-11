@@ -6,10 +6,8 @@ const getStorageValue = <T>(key: string, defaultValue: T): T => {
   return initial || defaultValue;
 };
 
-export const useLocalStorage = <T>(key: string, defaultValue: T) => {
-  const [value, setValue] = useState(() => {
-    return getStorageValue(key, defaultValue);
-  });
+const useLocalStorage = <T>(key: string, defaultValue: T) => {
+  const [value, setValue] = useState(() => getStorageValue(key, defaultValue));
 
   useEffect(() => {
     localStorage.setItem(key, JSON.stringify(value));
@@ -17,3 +15,5 @@ export const useLocalStorage = <T>(key: string, defaultValue: T) => {
 
   return [value, setValue] as const;
 };
+
+export default useLocalStorage;

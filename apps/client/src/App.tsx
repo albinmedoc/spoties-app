@@ -17,29 +17,11 @@ import translations from "@shopify/polaris/locales/en.json";
 import "@shopify/polaris/build/esm/styles.css";
 import Router from "@client/routes/Router";
 
-const PolarisProvider = (_PolarisProvider as unknown) as React.FC<PolarisProviderProps>;
-
-export default function App() {
-  return (
-    <BrowserRouter>
-      <PolarisProvider i18n={translations} linkComponent={Link}>
-        <AppBridgeProvider
-          config={{
-            apiKey: process.env.SHOPIFY_API_KEY,
-            host: new URLSearchParams(location.search).get("host"),
-            forceRedirect: true,
-          }}
-        >
-          <MyProvider>
-            <Router />
-          </MyProvider>
-        </AppBridgeProvider>
-      </PolarisProvider>
-    </BrowserRouter>
-  );
+interface MyProviderProps{
+  children: JSX.Element | JSX.Element[];
 }
 
-function MyProvider({ children }) {
+function MyProvider({ children }: MyProviderProps) {
   const app = useAppBridge();
 
   const client = new ApolloClient({
@@ -62,10 +44,8 @@ interface LinkProps extends ReactRouterLinkProps {
 
 function Link({ children, url = "", external, ...rest }: LinkProps) {
   if (external || IS_EXTERNAL_LINK_REGEX.test(url)) {
-    rest.target = "_blank";
-    rest.rel = "noopener noreferrer";
     return (
-      <a href={url} {...rest}>
+      <a href={url} target="_blank" rel="noopener noreferrer" {...rest}>
         {children}
       </a>
     );
@@ -74,5 +54,27 @@ function Link({ children, url = "", external, ...rest }: LinkProps) {
     <ReactRouterLink to={url} {...rest}>
       {children}
     </ReactRouterLink>
+  );
+}
+
+const PolarisProvider = (_PolarisProvider as unknown) as React.FC<PolarisProviderProps>;
+
+export default function App() {
+  return (
+    <BrowserRouter>
+      <PolarisProvider i18n={translations} linkComponent={Link}>
+        <AppBridgeProvider
+          config={{
+            apiKey: process.env.SHOPIFY_API_KEY,
+            host: new URLSearchParams(window.location.search).get("host"),
+            forceRedirect: true,
+          }}
+        >
+          <MyProvider>
+            <Router />
+          </MyProvider>
+        </AppBridgeProvider>
+      </PolarisProvider>
+    </BrowserRouter>
   );
 }

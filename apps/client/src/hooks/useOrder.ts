@@ -4,19 +4,20 @@ import { GET_ORDER_QUERY } from "@client/graphql";
 import { getNodesFromConnections } from "@client/utilities/graphql";
 import type { QueryOrder, Order } from '@types';
 
-export const useOrder = ({ id = null, maxProducts = 10 } = {}) => {
+const useOrder = ({ id = null, maxProducts = 10 } = {}) => {
   const { data, loading } = useQuery<{ order: QueryOrder }>(GET_ORDER_QUERY, {
     variables: { id, maxProducts },
     fetchPolicy: "network-only",
   });
 
   const order: Order = useMemo(() => {
-    if (!data) {
+    if (loading || !data) {
       return null;
     }
 
     return {
       ...data.order,
+      totalPrice: data.order.currentSubtotalPriceSet.shopMoney.amount,
       products: getNodesFromConnections(data.order.lineItems).map(
         (product) => ({
           ...product,
@@ -34,3 +35,5 @@ export const useOrder = ({ id = null, maxProducts = 10 } = {}) => {
 
   return useMemo(() => ({ order, loading }), [order, loading]);
 };
+
+export default useOrder;
