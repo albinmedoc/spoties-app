@@ -18,6 +18,7 @@
     "paths": {
       "@backend/*": ["apps/backend/src/*"],
       "@client/*": ["apps/client/src/*"],
+      "@shared/*": ["libs/shared/src/*"],
       "@types": ["libs/types/src/index.d.ts"]
     }
   },

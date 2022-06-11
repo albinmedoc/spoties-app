@@ -4,6 +4,7 @@
   "projects": {
     "backend": "apps/backend",
     "client": "apps/client",
+    "shared": "libs/shared",
     "types": "libs/types"
   }
 }

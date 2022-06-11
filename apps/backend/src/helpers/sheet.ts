@@ -1,6 +1,6 @@
 import ExcelJS from "exceljs";
 import type { Order , Product} from '@types';
-import isUrl from "./is-url";
+import { isUrl } from "@shared/helpers";
 
 const generateWorkbookFromOrders = (orders: Order[]) => {
   const workbook = new ExcelJS.Workbook();

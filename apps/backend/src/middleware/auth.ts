@@ -1,6 +1,6 @@
 import { Shopify } from "@shopify/shopify-api";
 import type { Express, Request } from 'express';
-import topLevelAuthRedirect from "@backend/helpers/top-level-auth-redirect";
+import { topLevelAuthRedirect } from "@backend/helpers";
 import type { AuthQuery } from "@shopify/shopify-api";
 
 interface ShopifyAuthQuery extends AuthQuery{

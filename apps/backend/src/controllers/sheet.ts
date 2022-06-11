@@ -1,5 +1,5 @@
 import type { Request, Response, Application } from "express";
-import { generateWorkbookFromOrders } from "@backend/helpers/sheet";
+import { generateWorkbookFromOrders } from "@backend/helpers";
 
 export default function registerController(app: Application) {
   app.post("/sheet/orders", (req: Request, res: Response) => {
