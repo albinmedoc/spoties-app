@@ -1,4 +1,5 @@
 import { Shopify } from "@shopify/shopify-api";
+import type { Express, Request, Response, NextFunction } from 'express';
 
 const TEST_GRAPHQL_QUERY = `
 {
@@ -7,8 +8,8 @@ const TEST_GRAPHQL_QUERY = `
   }
 }`;
 
-export default function verifyRequest(app, { returnHeader = true } = {}) {
-  return async (req, res, next) => {
+export default function verifyRequest(app: Express, { returnHeader = true } = {}) {
+  return async (req: Request, res: Response, next: NextFunction) => {
     const session = await Shopify.Utils.loadCurrentSession(
       req,
       res,
@@ -71,9 +72,8 @@ export default function verifyRequest(app, { returnHeader = true } = {}) {
         "X-Shopify-API-Request-Failure-Reauthorize-Url",
         `/auth?shop=${shop}`
       );
-      res.end();
-    } else {
-      res.redirect(`/auth?shop=${shop}`);
+      return res.end();
     }
+    return res.redirect(`/auth?shop=${shop}`);
   };
 }

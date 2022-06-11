@@ -1,12 +1,18 @@
 import { Shopify } from "@shopify/shopify-api";
+import type { Express, Request } from 'express';
+import topLevelAuthRedirect from "@backend/helpers/top-level-auth-redirect";
+import type { AuthQuery } from "@shopify/shopify-api";
 
-import topLevelAuthRedirect from "@/helpers/top-level-auth-redirect";
+interface ShopifyAuthQuery extends AuthQuery{
+  [key: string]: string;
+}
 
-export default function applyAuthMiddleware(app) {
-  app.get("/auth", async (req, res) => {
+export default function applyAuthMiddleware(app: Express) {
+  app.get("/auth", async (req: Request<unknown, unknown, unknown, ShopifyAuthQuery>, res) => {
+    const query: Record<string, string> = req.query;
     if (!req.signedCookies[app.get("top-level-oauth-cookie")]) {
       return res.redirect(
-        `/auth/toplevel?${new URLSearchParams(req.query).toString()}`
+        `/auth/toplevel?${new URLSearchParams(query).toString()}`
       );
     }
 
@@ -18,10 +24,10 @@ export default function applyAuthMiddleware(app) {
       app.get("use-online-tokens")
     );
 
-    res.redirect(redirectUrl);
+    return res.redirect(redirectUrl);
   });
 
-  app.get("/auth/toplevel", (req, res) => {
+  app.get("/auth/toplevel", (req: Request<unknown, unknown, unknown, ShopifyAuthQuery>, res) => {
     res.cookie(app.get("top-level-oauth-cookie"), "1", {
       signed: true,
       httpOnly: true,
@@ -40,7 +46,7 @@ export default function applyAuthMiddleware(app) {
     );
   });
 
-  app.get("/auth/callback", async (req, res) => {
+  app.get("/auth/callback", async (req: Request<unknown, unknown, unknown, ShopifyAuthQuery>, res) => {
     try {
       const session = await Shopify.Auth.validateAuthCallback(
         req,
@@ -63,7 +69,7 @@ export default function applyAuthMiddleware(app) {
         path: "/webhooks",
       });
 
-      if (!response["APP_UNINSTALLED"].success) {
+      if (!response.APP_UNINSTALLED.success) {
         console.log(
           `Failed to register APP_UNINSTALLED webhook: ${response.result}`
         );

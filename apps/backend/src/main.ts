@@ -3,12 +3,12 @@ import express from "express";
 import cookieParser from "cookie-parser";
 import { Shopify, ApiVersion } from "@shopify/shopify-api";
 import "dotenv/config";
+import type { ViteDevServer } from "vite";
 
 import applyAuthMiddleware from "./middleware/auth";
 import verifyRequest from "./middleware/verify-request";
 
 import registerControllers from "./controllers/register";
-import type { ViteDevServer } from "vite";
 
 const USE_ONLINE_TOKENS = true;
 const TOP_LEVEL_OAUTH_COOKIE = "shopify_top_level_oauth";
@@ -32,13 +32,13 @@ Shopify.Context.initialize({
 const ACTIVE_SHOPIFY_SHOPS = {};
 Shopify.Webhooks.Registry.addHandler("APP_UNINSTALLED", {
   path: "/webhooks",
-  webhookHandler: async (topic, shop, body) => {
+  webhookHandler: async (_topic, shop, _body) => {
     delete ACTIVE_SHOPIFY_SHOPS[shop];
   },
 });
 
 // export for test use only
-export async function createServer(
+export default async function createServer(
   root = resolve(process.cwd(), 'apps/client'),
   configFile = resolve(process.cwd(), 'apps/client/vite.config.js'),
   isProd = process.env.NODE_ENV === "production"
@@ -111,8 +111,8 @@ export async function createServer(
 
   let vite: ViteDevServer;
   if (!isProd) {
-    vite = await import("vite").then(({ createServer }) =>
-      createServer({
+    vite = await import("vite").then(({ createServer: createviteServer }) =>
+    createviteServer({
         root,
         configFile,
         logLevel: isTest ? "error" : "info",
@@ -139,7 +139,7 @@ export async function createServer(
     const fs = await import("fs");
     app.use(compression());
     app.use(serveStatic(resolve("dist/client")));
-    app.use("/*", (req, res, next) => {
+    app.use("/*", (req, res) => {
       // Client-side routing will pick up on the correct route to render, so we always render the index here
       res
         .status(200)

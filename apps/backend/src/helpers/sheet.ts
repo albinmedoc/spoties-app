@@ -1,7 +1,8 @@
 import ExcelJS from "exceljs";
+import type { Order , Product} from '@types';
 import isUrl from "./is-url";
 
-const generateWorkbookFromOrders = (orders) => {
+const generateWorkbookFromOrders = (orders: Order[]) => {
   const workbook = new ExcelJS.Workbook();
   const worksheet = workbook.addWorksheet("Sheet 1");
 
@@ -15,7 +16,7 @@ const generateWorkbookFromOrders = (orders) => {
     { header: "Properties", key: "properties" },
   ];
 
-  const getCustomAttributes = (product) => {
+  const getCustomAttributes = (product: Product) => {
     if (product && product.customAttributes) {
       const attributes = product.customAttributes.reduce((result, attr) => {
         if (!isUrl(attr.value)) result.push(`${attr.key}: ${attr.value}`);
@@ -26,17 +27,17 @@ const generateWorkbookFromOrders = (orders) => {
     return "";
   };
 
-  const products = [];
+  const products: Record<string, string>[] = [];
 
   orders.forEach((order) => {
     order.products.forEach((product) => {
       products.push({
         id: order.name,
         createdAt: order.createdAt,
-        address: order.displayAddress?.formatted,
+        address: order.displayAddress?.formatted.toString(),
         customer: `${order.customer?.firstName} ${order.customer?.lastName}`,
         product: product.title,
-        quantity: product.quantity,
+        quantity: product.quantity.toString(),
         properties: getCustomAttributes(product),
       });
     });

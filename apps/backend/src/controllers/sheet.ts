@@ -1,5 +1,5 @@
-import { generateWorkbookFromOrders } from "@/helpers/sheet";
 import type { Request, Response, Application } from "express";
+import { generateWorkbookFromOrders } from "@backend/helpers/sheet";
 
 export default function registerController(app: Application) {
   app.post("/sheet/orders", (req: Request, res: Response) => {
@@ -10,7 +10,7 @@ export default function registerController(app: Application) {
       res.setHeader("Content-Type", "application/vnd.ms-exce");
       res.setHeader(
         "Content-Disposition",
-        "attachment; filename=" + "Report.xlsx"
+        "attachment; filename=Report.xlsx"
       );
       workbook.xlsx.write(res).then(() => {
         res.end();
@@ -19,7 +19,7 @@ export default function registerController(app: Application) {
       res.setHeader("Content-Type", "text/csv");
       res.setHeader(
         "Content-Disposition",
-        "attachment; filename=" + "Report.csv"
+        "attachment; filename=Report.csv"
       );
       workbook.csv.write(res).then(() => {
         res.end();

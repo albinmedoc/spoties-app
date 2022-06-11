@@ -9,7 +9,7 @@
       "options": {
         "outputPath": "dist/backend",
         "main": "apps/backend/src/main.ts",
-        "tsConfig": "apps/backend/tsconfig.app.json"
+        "tsConfig": "apps/backend/tsconfig.json"
       },
       "configurations": {
         "production": {
@@ -36,14 +36,6 @@
       "outputs": ["{options.outputFile}"],
       "options": {
         "lintFilePatterns": ["apps/backend/**/*.ts"]
-      }
-    },
-    "test": {
-      "executor": "@nrwl/jest:jest",
-      "outputs": ["coverage/apps/backend"],
-      "options": {
-        "jestConfig": "apps/backend/jest.config.ts",
-        "passWithNoTests": true
       }
     }
   },
