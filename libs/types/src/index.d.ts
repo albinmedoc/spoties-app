@@ -1,5 +1,8 @@
-export { Product } from './lib/Product';
+import Product from './lib/Product';
+import CustomAttribute from './lib/CustomAttribute';
 
-export { QueryOrder } from './lib/QueryOrder';
-export { QueryOrders } from './lib/QueryOrders';
-export { Order } from './lib/Order';
+import QueryOrder from './lib/QueryOrder';
+import QueryOrders from './lib/QueryOrders';
+import Order from './lib/Order';
+
+export { Product, CustomAttribute, QueryOrder, QueryOrders, Order }

@@ -1,7 +1,7 @@
-import type { OrderDisplayFulfillmentStatus } from './OrderDisplayFulfillmentStatus';
-import type { QueryProduct } from './QueryProduct';
+import type OrderDisplayFulfillmentStatus from './OrderDisplayFulfillmentStatus';
+import type QueryProduct from './QueryProduct';
 
-export interface QueryOrder {
+export default interface QueryOrder {
     id: string;
     name: string;
     createdAt: string;

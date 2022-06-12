@@ -1,4 +1,6 @@
-export interface QueryProduct {
+import type CustomAttribute from "./CustomAttribute";
+
+export default interface QueryProduct {
     id: string;
     title: string;
     variant: {
@@ -9,8 +11,5 @@ export interface QueryProduct {
         altText?: string;
         url: string;
     }
-    customAttributes: {
-        key: string;
-        value?: string;
-    }[]
+    customAttributes: CustomAttribute[]
 }

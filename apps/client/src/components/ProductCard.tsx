@@ -1,6 +1,6 @@
 import { Card, Thumbnail, Badge, TextStyle } from "@shopify/polaris";
-import { isUrl } from "@shared/helpers";
-import type { Product } from '@types';
+import { isUrl, isImageUrl } from "@shared/helpers";
+import type { Product, CustomAttribute } from '@types';
 
 interface ProductCardProps {
   product: Product;
@@ -16,21 +16,25 @@ export default function ProductCard(props: ProductCardProps) {
     </p>
   ) : null;
 
-  const customAttributesMarkup = product.customAttributes.map(
-    (customAttribute) => {
-      const value = customAttribute.value;
-
-      return (
-        <p key={customAttribute.key}>
-          <TextStyle variation="subdued">{customAttribute.key}: </TextStyle>
-          {!isUrl(value) ? value: <Thumbnail
-            source={value}
-            alt={customAttribute.key}
-            size="medium"
-          />}
-        </p>
-      );
+  const customAttributeValueMarkup = (attribute: CustomAttribute) => {
+    if(isUrl(attribute.value)) {
+      if(isImageUrl(attribute.value)){
+        return <Thumbnail
+        source={attribute.value}
+        alt={attribute.key}
+        size="medium"
+      />
+      }
+      return <a href={attribute.value}>{attribute.value}</a>
     }
+    return <span>{attribute.value}</span>
+  }
+
+  const customAttributesMarkup = product.customAttributes.map(
+    (customAttribute) => <p key={customAttribute.key}>
+          <TextStyle variation="subdued">{customAttribute.key}: </TextStyle>
+          {customAttributeValueMarkup(customAttribute)}
+        </p>
   );
 
   return (

@@ -1,4 +1,4 @@
-import { QueryOrder } from './QueryOrder';
+import QueryOrder from './QueryOrder';
 
 export default interface QueryOrders extends QueryOrder {
     edges: {

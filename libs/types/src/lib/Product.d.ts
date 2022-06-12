@@ -1,6 +1,6 @@
-import { QueryProduct } from "./QueryProduct";
+import type QueryProduct from "./QueryProduct";
 
-interface Product extends QueryProduct{
+export default interface Product extends QueryProduct{
     variant: string;
     quantity: number;
 }
