@@ -1,5 +1,5 @@
 import { Card, Thumbnail, Badge, TextStyle } from "@shopify/polaris";
-import { isValidUrl } from "@client/helpers";
+import { isUrl } from "@shared/helpers";
 import type { Product } from '@types';
 
 interface ProductCardProps {
@@ -23,7 +23,7 @@ export default function ProductCard(props: ProductCardProps) {
       return (
         <p key={customAttribute.key}>
           <TextStyle variation="subdued">{customAttribute.key}: </TextStyle>
-          {!isValidUrl(value) ? value: <Thumbnail
+          {!isUrl(value) ? value: <Thumbnail
             source={value}
             alt={customAttribute.key}
             size="medium"

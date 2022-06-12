@@ -2,6 +2,7 @@ import { useQuery } from "@apollo/react-hooks";
 import { useMemo } from "react";
 import { GET_ORDERS_QUERY } from "@client/graphql";
 import { getNodesFromConnections } from "@client/utilities/graphql";
+import { getSpotifyUrlFromCustomAttributes } from '@client/helpers';
 import type { QueryOrders, QueryOrder, Order } from "@types";
 
 const useOrders = (
@@ -26,6 +27,13 @@ const useOrders = (
       products: getNodesFromConnections(node.lineItems).map((product) => ({
         ...product,
         quantity: product.currentQuantity,
+        customAttributes: [
+          ...product.customAttributes,
+          {
+            key: 'Spotify URL',
+            value: getSpotifyUrlFromCustomAttributes(product.customAttributes)
+          }
+        ],
         variant: product.variant?.title,
       })),
       trackingNumbers: node?.fulfillments

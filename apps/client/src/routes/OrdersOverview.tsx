@@ -13,11 +13,10 @@ import { useMemo, useState, useCallback } from "react";
 import { saveAs } from "file-saver";
 import { useOrders } from "@client/hooks";
 import { fetchOrdersCSV, fetchOrdersExcel } from "@client/services/sheet";
-import { extractIdFromGid } from "@client/helpers";
+import { extractIdFromGid } from "@shared/helpers";
 import { OrderStatusBadge } from "@client/components";
 import type { NonEmptyArray } from "@shopify/polaris/build/ts/latest/src/types";
 import type { IndexTableHeading } from "@shopify/polaris/build/ts/latest/src/components/IndexTable";
-import { Order } from "@types";
 
 export default function OrdersOverview() {
   const queries = [
@@ -54,6 +53,10 @@ export default function OrdersOverview() {
     },
     [queryId]
   );
+
+  // For debbuging
+  // eslint-disable-next-line no-console
+  console.log(orders);
 
   const resourceName = {
     singular: "order",

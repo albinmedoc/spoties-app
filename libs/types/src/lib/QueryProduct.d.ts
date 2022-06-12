@@ -9,10 +9,8 @@ export interface QueryProduct {
         altText?: string;
         url: string;
     }
-    customAttributes: [
-        {
-            key: string;
-            value?: string;
-        }
-    ]
+    customAttributes: {
+        key: string;
+        value?: string;
+    }[]
 }

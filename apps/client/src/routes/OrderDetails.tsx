@@ -1,7 +1,7 @@
 import { Page, Spinner } from "@shopify/polaris";
 import { useParams } from "react-router-dom";
 import { useOrder, useOrderUpdate } from "@client/hooks";
-import { generateShopifyOrderGid } from "@client/helpers";
+import { generateShopifyOrderGid } from "@shared/helpers";
 import { OrderStatusBadge, ProductCard, Tags } from "@client/components";
 
 export default function OrderDetails() {
