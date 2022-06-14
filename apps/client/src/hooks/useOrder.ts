@@ -30,7 +30,6 @@ const useOrder = ({ id = null, maxProducts = 10 } = {}) => {
               value: getSpotifyUrlFromCustomAttributes(product.customAttributes)
             }
           ],
-          variant: product.variant?.title,
         })
       ),
       trackingNumbers: data.order?.fulfillments

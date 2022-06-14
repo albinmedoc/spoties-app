@@ -9,10 +9,10 @@ interface ProductCardProps {
 export default function ProductCard(props: ProductCardProps) {
   const { product } = props;
 
-  const variantMarkup = product.variant ? (
+  const variantMarkup = product.variantTitle ? (
     <p>
       <TextStyle variation="subdued">Variant: </TextStyle>
-      {product.variant}
+      {product.variantTitle}
     </p>
   ) : null;
 

@@ -1,6 +1,5 @@
 import type QueryProduct from "./QueryProduct";
 
-export default interface Product extends QueryProduct{
-    variant: string;
+export default interface Product extends QueryProduct {
     quantity: number;
 }

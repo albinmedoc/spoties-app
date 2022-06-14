@@ -29,9 +29,7 @@ const GET_ORDERS_QUERY = gql`
             edges {
               node {
                 title
-                variant {
-                  title
-                }
+                variantTitle
                 currentQuantity
                 image {
                   altText
