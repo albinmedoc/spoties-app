@@ -3,16 +3,19 @@ import { useMemo } from "react";
 import { GET_ORDERS_QUERY } from "@client/graphql";
 import { getNodesFromConnections } from "@client/utilities/graphql";
 import { getSpotifyUrlFromCustomAttributes } from '@client/helpers';
-import type { QueryOrders, QueryOrder, Order } from "@types";
+import type { PagedResult, QueryOrder, Order } from "@types";
 
 const useOrders = (
   { query = "", maxOrders = 20, maxProducts = 10 } = {},
   deps = []
 ) => {
-  const { data, loading } = useQuery<{ orders: QueryOrders }>(GET_ORDERS_QUERY, {
+  const { data, loading } = useQuery<{orders: PagedResult<QueryOrder>}>(GET_ORDERS_QUERY, {
     variables: { query, maxOrders, maxProducts },
     fetchPolicy: "network-only",
   });
+
+  // eslint-disable-next-line no-console
+  console.log(data)
 
   const orders: Order[] = useMemo(() => {
     if (loading || !data) {
@@ -34,7 +37,6 @@ const useOrders = (
             value: getSpotifyUrlFromCustomAttributes(product.customAttributes)
           }
         ],
-        variant: product.variant?.title,
       })),
       trackingNumbers: node?.fulfillments
         ?.map((fulfillment) =>
