@@ -1,7 +1,7 @@
 import useOrder from "./useOrder";
-import useOrders from "./useOrders";
+import useMinimalOrders from "./useMinimalOrders";
 import useOrderUpdate from "./useOrderUpdate";
 
 import useLocalStorage from "./useLocalStorage";
 
-export { useOrder, useOrders, useOrderUpdate, useLocalStorage };
+export { useOrder, useMinimalOrders, useOrderUpdate, useLocalStorage };

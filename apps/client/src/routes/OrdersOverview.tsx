@@ -11,7 +11,7 @@ import { useAppBridge } from "@shopify/app-bridge-react";
 import { Link } from "react-router-dom";
 import { useMemo, useState, useCallback } from "react";
 import { saveAs } from "file-saver";
-import { useOrders } from "@client/hooks";
+import { useMinimalOrders } from "@client/hooks";
 import { fetchOrdersCSV, fetchOrdersExcel } from "@client/services/sheet";
 import { extractIdFromGid } from "@shared/helpers";
 import { OrderStatusBadge } from "@client/components";
@@ -47,7 +47,7 @@ export default function OrdersOverview() {
     loading: ordersLoading,
     previousCursor,
     nextCursor,
-  } = useOrders(
+  } = useMinimalOrders(
     {
       query: queries.find((query) => query.id === queryId).query,
     },
@@ -132,12 +132,11 @@ export default function OrdersOverview() {
       </IndexTable.Cell>
       <IndexTable.Cell>{order.createdAt}</IndexTable.Cell>
       <IndexTable.Cell>{order.totalPrice}</IndexTable.Cell>
-      <IndexTable.Cell>{order.products.length}</IndexTable.Cell>
       <IndexTable.Cell>
         {order.customer?.firstName} {order.customer?.lastName}
       </IndexTable.Cell>
       <IndexTable.Cell>
-        <OrderStatusBadge order={order} />
+        <OrderStatusBadge status={order.displayFulfillmentStatus} tags={order.tags} />
       </IndexTable.Cell>
     </IndexTable.Row>
   ));

@@ -1,8 +1,7 @@
 import { useQuery } from "@apollo/react-hooks";
 import { useMemo } from "react";
 import { GET_ORDER_QUERY } from "@client/graphql";
-import { getNodesFromConnections } from "@client/utilities/graphql";
-import { getSpotifyUrlFromCustomAttributes } from '@client/helpers';
+import { converQueryOrderToOrder } from '@client/helpers';
 import type { QueryOrder, Order } from '@types';
 
 const useOrder = ({ id = null, maxProducts = 10 } = {}) => {
@@ -16,28 +15,7 @@ const useOrder = ({ id = null, maxProducts = 10 } = {}) => {
       return null;
     }
 
-    return {
-      ...data.order,
-      totalPrice: data.order.currentSubtotalPriceSet.shopMoney.amount,
-      products: getNodesFromConnections(data.order.lineItems).map(
-        (product) => ({
-          ...product,
-          quantity: product.currentQuantity,
-          customAttributes: [
-            ...product.customAttributes,
-            {
-              key: 'Spotify URL',
-              value: getSpotifyUrlFromCustomAttributes(product.customAttributes)
-            }
-          ],
-        })
-      ),
-      trackingNumbers: data.order?.fulfillments
-        ?.map((fulfillment) =>
-          fulfillment?.trackingInfo?.map((trackingInfo) => trackingInfo?.number)
-        )
-        .flat(),
-    };
+    return converQueryOrderToOrder(data.order);
   }, [data, loading]);
 
   return useMemo(() => ({ order, loading }), [order, loading]);

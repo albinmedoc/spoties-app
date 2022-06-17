@@ -1,28 +1,28 @@
 import { useMemo } from "react";
 import { Badge } from "@shopify/polaris";
-import type { Order } from '@types';
+import type { OrderDisplayFulfillmentStatus } from '@types';
 
 interface OrderStatusBadgeProps {
-  order: Order;
+  status: OrderDisplayFulfillmentStatus,
+  tags: string[]
 }
 
 export default function OrderStatusBadge(props: OrderStatusBadgeProps) {
   const status = useMemo((): { title: string; color?: "success" | "attention" | "info"  } => {
-    const order = props.order;
-    if (order.displayFulfillmentStatus === "FULFILLED") {
+    if (props.status === "FULFILLED") {
       return { title: "Fulfilled", color: "success" };
     }
-    if (order.displayFulfillmentStatus === "PARTIALLY_FULFILLED") {
+    if (props.status === "PARTIALLY_FULFILLED") {
       return { title: "Partial fulfilled", color: "attention" };
     }
     if (
-      order.tags.includes("AliExpress") ||
-      order.tags.includes("AliExpress")
+      props.tags.includes("AliExpress") ||
+      props.tags.includes("AliExpress")
     ) {
       return { title: "Handled", color: "info" };
     }
     return { title: "Unfulfilled", color: null };
-  }, [props.order]);
+  }, [props.status, props.tags]);
 
   return <Badge status={status.color}>{status.title}</Badge>;
 }

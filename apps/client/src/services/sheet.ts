@@ -2,6 +2,11 @@ import type { AppBridgeState, ClientApplication } from "@shopify/app-bridge";
 import { userLoggedInFetch } from "@client/helpers";
 import { Order } from "@types";
 
+const getOrders = (orderNames: string[]) => {
+  let query: string =  orderNames.map((orderId) => `name:'${orderNames}'`).join(' | ');
+  
+}
+
 const fetchOrders = (app: ClientApplication<AppBridgeState>, orders: Order[], responseType: string) => {
   const fetch = userLoggedInFetch(app);
 

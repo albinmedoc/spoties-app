@@ -28,7 +28,7 @@ export default function OrderDetails() {
     <Page
       breadcrumbs={[{ content: "Orders", url: "/orders" }]}
       title={order.name}
-      titleMetadata={<OrderStatusBadge order={order} />}
+      titleMetadata={<OrderStatusBadge status={order.displayFulfillmentStatus} tags={order.tags} />}
     >
       {productsMarkup}
       <Tags selectedTags={order.tags} updateTags={updateTags} />
