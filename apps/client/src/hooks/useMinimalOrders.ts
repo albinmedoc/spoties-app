@@ -4,8 +4,13 @@ import { GET_MINIMAL_ORDERS_QUERY } from "@client/graphql";
 import { getNodesFromConnections } from "@client/utilities/graphql";
 import type { PagedResult, QueryMinimalOrder, MinimalOrder } from "@types";
 
+interface Parameters {
+  query?: string;
+  maxOrders?: number;
+}
+
 const useMinimalOrders = (
-  { query = "", maxOrders = 20 } = {},
+  { query = "", maxOrders = 20 }: Parameters = {},
   deps = []
 ) => {
   const { data, loading } = useQuery<{orders: PagedResult<QueryMinimalOrder>}>(GET_MINIMAL_ORDERS_QUERY, {
