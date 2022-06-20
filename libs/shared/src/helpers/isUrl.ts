@@ -5,7 +5,7 @@ const urlRegex = new RegExp(urlExpression);
 const imageUrlExpression = /(https?:\/\/.*\.(?:png|jpg))/gi;
 const imageUrlRegex = new RegExp(imageUrlExpression);
 
-const isUrl = (query: string): boolean => !!query.match(urlRegex);
+const isUrl = (query: string): boolean => !!query && !!query.match(urlRegex);
 
 const isImageUrl = (query: string): boolean => isUrl(query) && !!query.match(imageUrlRegex);
 

@@ -145,7 +145,6 @@ export default function OrdersOverview() {
     { title: "Name" },
     { title: "Created At" },
     { title: "Price" },
-    { title: "Quantity" },
     { title: "Customer" },
     { title: "Status" },
   ];
