@@ -1,48 +1,11 @@
 import { gql } from "@apollo/client";
+import { OrderFields } from "../fragments";
 
 const GET_ORDER_QUERY = gql`
-  query GetOrders($id: ID!, $maxProducts: Int) {
+  ${OrderFields}
+  query GetOrder($id: ID!, $maxProducts: Int) {
     order(id: $id) {
-      id
-      name
-      createdAt
-      displayAddress {
-        formatted(withName: true, withCompany: true)
-      }
-      customer {
-        firstName
-        lastName
-      }
-      currentSubtotalPriceSet {
-        shopMoney {
-          amount
-        }
-      }
-      lineItems(first: $maxProducts) {
-        edges {
-          node {
-            id
-            title
-            variantTitle
-            currentQuantity
-            image {
-              altText
-              url
-            }
-            customAttributes {
-              key
-              value
-            }
-          }
-        }
-      }
-      tags
-      displayFulfillmentStatus
-      fulfillments {
-        trackingInfo {
-          number
-        }
-      }
+      ...OrderFields
     }
   }
 `;

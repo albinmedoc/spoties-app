@@ -1,15 +1,15 @@
 import { useQuery } from "@apollo/react-hooks";
 import { useMemo } from "react";
-import { GET_ORDERS_QUERY } from "@client/graphql";
+import { GET_MINIMAL_ORDERS_QUERY } from "@client/graphql";
 import { getNodesFromConnections } from "@client/utilities/graphql";
 import type { PagedResult, QueryMinimalOrder, MinimalOrder } from "@types";
 
 const useMinimalOrders = (
-  { query = "", maxOrders = 20, maxProducts = 10 } = {},
+  { query = "", maxOrders = 20 } = {},
   deps = []
 ) => {
-  const { data, loading } = useQuery<{orders: PagedResult<QueryMinimalOrder>}>(GET_ORDERS_QUERY, {
-    variables: { query, maxOrders, maxProducts },
+  const { data, loading } = useQuery<{orders: PagedResult<QueryMinimalOrder>}>(GET_MINIMAL_ORDERS_QUERY, {
+    variables: { query, maxOrders },
     fetchPolicy: "network-only",
   });
 

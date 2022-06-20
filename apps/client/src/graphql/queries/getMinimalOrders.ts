@@ -1,7 +1,11 @@
 import { gql } from "@apollo/client";
+import { MinimalOrderFields, PageInfoFields } from "../fragments";
 
-const GET_ORDERS_QUERY = gql`
-  query GetOrders($query: String, $maxOrders: Int, $maxProducts: Int) {
+
+const GET_MINIMAL_ORDERS_QUERY = gql`
+  ${MinimalOrderFields}
+  ${PageInfoFields}
+  query GetMinimalOrders($query: String, $maxOrders: Int) {
     orders(
       first: $maxOrders
       query: $query
@@ -10,30 +14,14 @@ const GET_ORDERS_QUERY = gql`
     ) {
       edges {
         node {
-          id
-          name
-          createdAt
-          customer {
-            firstName
-            lastName
-          }
-          currentSubtotalPriceSet {
-            shopMoney {
-              amount
-            }
-          }
-          tags
-          displayFulfillmentStatus
+          ...MinimalOrderFields
         }
       }
       pageInfo {
-        hasNextPage
-        endCursor
-        hasPreviousPage
-        startCursor
+        ...PageInfoFields
       }
     }
   }
 `;
 
-export default GET_ORDERS_QUERY;
+export default GET_MINIMAL_ORDERS_QUERY;
