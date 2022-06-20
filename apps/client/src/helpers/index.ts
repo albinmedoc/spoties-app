@@ -1,5 +1,5 @@
 import userLoggedInFetch from "./userLoggedInFetch";
 import getSpotifyUrlFromCustomAttributes from './getSpotifyUrlFromCustomAttributes';
-import { converQueryOrderToOrder } from './convert';
+import { convertQueryOrderToOrder } from './convert';
 
-export { userLoggedInFetch, getSpotifyUrlFromCustomAttributes, converQueryOrderToOrder };
+export { userLoggedInFetch, getSpotifyUrlFromCustomAttributes, convertQueryOrderToOrder };

@@ -2,7 +2,7 @@ import { getNodesFromConnections } from "@client/utilities/graphql";
 import { QueryOrder, Order } from '@types';
 import getSpotifyUrlFromCustomAttributes from "./getSpotifyUrlFromCustomAttributes";
 
-const converQueryOrderToOrder = (queryOrder: QueryOrder): Order => ({
+const convertQueryOrderToOrder = (queryOrder: QueryOrder): Order => ({
         ...queryOrder,
         totalPrice: queryOrder.currentSubtotalPriceSet.shopMoney.amount,
         products: getNodesFromConnections(queryOrder.lineItems).map(
@@ -25,4 +25,4 @@ const converQueryOrderToOrder = (queryOrder: QueryOrder): Order => ({
             .flat(),
     });
 
-export { converQueryOrderToOrder }
+export { convertQueryOrderToOrder }

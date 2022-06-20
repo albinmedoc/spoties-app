@@ -1,7 +1,7 @@
 import { useQuery } from "@apollo/react-hooks";
 import { useMemo } from "react";
 import { GET_ORDER_QUERY } from "@client/graphql";
-import { converQueryOrderToOrder } from '@client/helpers';
+import { convertQueryOrderToOrder } from '@client/helpers';
 import type { QueryOrder, Order } from '@types';
 
 const useOrder = ({ id = null, maxProducts = 10 } = {}) => {
@@ -15,7 +15,7 @@ const useOrder = ({ id = null, maxProducts = 10 } = {}) => {
       return null;
     }
 
-    return converQueryOrderToOrder(data.order);
+    return convertQueryOrderToOrder(data.order);
   }, [data, loading]);
 
   return useMemo(() => ({ order, loading }), [order, loading]);
