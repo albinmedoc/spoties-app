@@ -3,7 +3,7 @@ import { OrderFields } from "../fragments";
 
 const GET_ORDERS_BY_ID_QUERY = gql`
   ${OrderFields}
-  query GetOrdersById($ids: [ID]!, $maxProducts: Int) {
+  query GetOrdersById($ids: [ID!]!, $maxProducts: Int = 10) {
     nodes(ids: $ids) {
         ...on Order {
             ...OrderFields

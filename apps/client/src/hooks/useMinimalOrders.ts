@@ -18,9 +18,6 @@ const useMinimalOrders = (
     fetchPolicy: "network-only",
   });
 
-  // eslint-disable-next-line no-console
-  console.log(data)
-
   const orders: MinimalOrder[] = useMemo(() => {
     if (loading || !data) {
       return [];

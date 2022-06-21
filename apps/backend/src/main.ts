@@ -8,8 +8,6 @@ import type { ViteDevServer } from "vite";
 import applyAuthMiddleware from "./middleware/auth";
 import verifyRequest from "./middleware/verify-request";
 
-import registerControllers from "./controllers/register";
-
 const USE_ONLINE_TOKENS = true;
 const TOP_LEVEL_OAUTH_COOKIE = "shopify_top_level_oauth";
 
@@ -75,8 +73,6 @@ export default async function createServer(
   });
 
   app.use(express.json());
-
-  registerControllers(app);
 
   app.use((req, res, next) => {
     const shop = req.query.shop;
