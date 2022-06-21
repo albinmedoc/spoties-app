@@ -93,7 +93,7 @@ export default function OrdersTable(props: OrderTableProps) {
                     </Link>
                 </TextStyle>
             </IndexTable.Cell>
-            <IndexTable.Cell>{order.createdAt}</IndexTable.Cell>
+            <IndexTable.Cell>{dayjs(order.createdAt).format('YYYY-MM-DD HH:mm')}</IndexTable.Cell>
             <IndexTable.Cell>{order.totalPrice}</IndexTable.Cell>
             <IndexTable.Cell>
                 {order.customer?.firstName} {order.customer?.lastName}
