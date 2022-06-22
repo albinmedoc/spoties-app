@@ -1,5 +1,5 @@
 import type OrderDisplayFulfillmentStatus from './OrderDisplayFulfillmentStatus';
-import type QueryProduct from './QueryProduct';
+import type QueryMinimalProduct from './QueryMinimalProduct';
 
 export default interface QueryOrder {
     id: string;
@@ -17,7 +17,7 @@ export default interface QueryOrder {
             amount: number;
         }
     };
-    lineItems: { edges: { node: QueryProduct }[] };
+    lineItems: { edges: { node: QueryMinimalProduct }[] };
     tags: string[];
     displayFulfillmentStatus: OrderDisplayFulfillmentStatus;
     fulfillments: {
