@@ -1,6 +1,6 @@
 import type CustomAttribute from "./CustomAttribute";
 
-export default interface QueryProduct {
+export default interface QueryLineItem {
     id: string;
     title: string;
     variantTitle?: string;
