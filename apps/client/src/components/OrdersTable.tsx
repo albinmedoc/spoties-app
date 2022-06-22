@@ -13,6 +13,7 @@ import { OrderStatusBadge } from "@client/components";
 import { saveAs } from "file-saver";
 import type { NonEmptyArray } from "@shopify/polaris/build/ts/latest/src/types";
 import type { IndexTableHeading } from "@shopify/polaris/build/ts/latest/src/components/IndexTable";
+import type { MinimalOrder } from "@types";
 
 interface OrderTableProps {
     query: string;
@@ -34,7 +35,7 @@ export default function OrdersTable(props: OrderTableProps) {
     const [loadSelectedOrders, { orders: selectedOrders }] = useOrdersByIdLazy();
 
     const { selectedResources: selectedOrderIds, allResourcesSelected: allOrdersSelected, handleSelectionChange } =
-        useIndexResourceState(orders);
+        useIndexResourceState(orders as Array<MinimalOrder & {[key: string]: unknown}>);
 
     const exportOrders = (exportFormat: 'CSV' | 'EXCEL') => loadSelectedOrders({variables: { ids: selectedOrderIds }})
         .then(() => generateWorkbookFromOrders(selectedOrders))
