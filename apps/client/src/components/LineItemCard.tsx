@@ -2,17 +2,17 @@ import { Card, Thumbnail, Badge, TextStyle } from "@shopify/polaris";
 import { isUrl, isImageUrl } from "@shared/helpers";
 import type { LineItem, CustomAttribute } from '@types';
 
-interface ProductCardProps {
-  product: LineItem;
+interface LineItemCardProps {
+  lineItem: LineItem;
 }
 
-export default function ProductCard(props: ProductCardProps) {
-  const { product } = props;
+export default function LineItemCard(props: LineItemCardProps) {
+  const { lineItem } = props;
 
-  const variantMarkup = product.variantTitle ? (
+  const variantMarkup = lineItem.variantTitle ? (
     <p>
       <TextStyle variation="subdued">Variant: </TextStyle>
-      {product.variantTitle}
+      {lineItem.variantTitle}
     </p>
   ) : null;
 
@@ -30,7 +30,7 @@ export default function ProductCard(props: ProductCardProps) {
     return <span>{attribute.value}</span>
   }
 
-  const customAttributesMarkup = product.customAttributes.map(
+  const customAttributesMarkup = lineItem.customAttributes.map(
     (customAttribute) => <p key={customAttribute.key}>
           <TextStyle variation="subdued">{customAttribute.key}: </TextStyle>
           {customAttributeValueMarkup(customAttribute)}
@@ -40,15 +40,15 @@ export default function ProductCard(props: ProductCardProps) {
   return (
     <Card>
       <div>
-        <Badge>{product.quantity.toString()}</Badge>
+        <Badge>{lineItem.quantity.toString()}</Badge>
         <Thumbnail
-          source={product.image?.url}
-          alt={product.image?.altText}
+          source={lineItem.image?.url}
+          alt={lineItem.image?.altText}
           size="small"
         />
       </div>
       <div>
-        <h2>{product.title}</h2>
+        <h2>{lineItem.title}</h2>
         {variantMarkup}
         {customAttributesMarkup}
       </div>

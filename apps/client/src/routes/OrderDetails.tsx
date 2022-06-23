@@ -2,7 +2,7 @@ import { Page, Spinner } from "@shopify/polaris";
 import { useParams } from "react-router-dom";
 import { useOrder, useOrderUpdate } from "@client/hooks";
 import { generateShopifyOrderGid } from "@shared/helpers";
-import { OrderStatusBadge, ProductCard, Tags } from "@client/components";
+import { OrderStatusBadge, LineItemCard, Tags } from "@client/components";
 
 export default function OrderDetails() {
   const { id } = useParams();
@@ -20,8 +20,8 @@ export default function OrderDetails() {
     updateOrder({ id: order.id, tags });
   };
 
-  const productsMarkup = order.products.map((product) => (
-    <ProductCard product={product} key={product.id} />
+  const productsMarkup = order.lineItems.map((product) => (
+    <LineItemCard lineItem={product} key={product.id} />
   ));
 
   return (

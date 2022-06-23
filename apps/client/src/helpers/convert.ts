@@ -5,15 +5,15 @@ import getSpotifyUrlFromCustomAttributes from "./getSpotifyUrlFromCustomAttribut
 const convertQueryOrderToOrder = (queryOrder: QueryOrder): Order => ({
     ...queryOrder,
     totalPrice: queryOrder.currentSubtotalPriceSet.shopMoney.amount,
-    products: getNodesFromConnections(queryOrder.lineItems).map(
-        (product) => ({
-            ...product,
-            quantity: product.currentQuantity,
+    lineItems: getNodesFromConnections(queryOrder.lineItems).map(
+        (lineItem) => ({
+            ...lineItem,
+            quantity: lineItem.currentQuantity,
             customAttributes: [
-                ...product.customAttributes,
+                ...lineItem.customAttributes,
                 {
                     key: 'Spotify URL',
-                    value: getSpotifyUrlFromCustomAttributes(product.customAttributes)
+                    value: getSpotifyUrlFromCustomAttributes(lineItem.customAttributes)
                 }
             ],
         })

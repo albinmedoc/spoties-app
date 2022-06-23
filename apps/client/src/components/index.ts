@@ -1,7 +1,7 @@
 import OrderStatusBadge from "./OrderStatusBadge";
-import ProductCard from "./ProductCard";
+import LineItemCard from "./LineItemCard";
 import Tags from "./Tags";
 import OrdersTable from "./OrdersTable";
 import ProductsTable from './ProductTable';
 
-export { OrderStatusBadge, ProductCard, Tags, OrdersTable, ProductsTable };
+export { OrderStatusBadge, LineItemCard, Tags, OrdersTable, ProductsTable };
