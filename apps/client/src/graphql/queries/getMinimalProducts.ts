@@ -2,7 +2,7 @@ import { gql } from "@apollo/client";
 import { ProductFields, PageInfoFields } from "../fragments";
 
 
-const GET_PRODUCTS_QUERY = gql`
+const GET_MINIMAL_PRODUCTS_QUERY = gql`
   ${ProductFields}
   ${PageInfoFields}
   query GetProducts($query: String) {
@@ -24,4 +24,4 @@ const GET_PRODUCTS_QUERY = gql`
   }
 `;
 
-export default GET_PRODUCTS_QUERY;
+export default GET_MINIMAL_PRODUCTS_QUERY;

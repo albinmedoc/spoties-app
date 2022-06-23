@@ -1,6 +1,6 @@
 import { useQuery } from "@apollo/react-hooks";
 import { useMemo } from "react";
-import { GET_PRODUCTS_QUERY } from "@client/graphql";
+import { GET_MINIMAL_PRODUCTS_QUERY } from "@client/graphql";
 import { getNodesFromConnections } from "@client/utilities/graphql";
 import type { PagedResult, QueryMinimalProduct, MinimalProduct } from "@types";
 
@@ -8,11 +8,11 @@ interface Parameters {
   query?: string;
 }
 
-const useMinimalOrders = (
+const useMinimalProducts = (
   { query = "" }: Parameters = {},
   deps = []
 ) => {
-  const { data, loading } = useQuery<{products: PagedResult<QueryMinimalProduct>}>(GET_PRODUCTS_QUERY, {
+  const { data, loading } = useQuery<{products: PagedResult<QueryMinimalProduct>}>(GET_MINIMAL_PRODUCTS_QUERY, {
     variables: { query },
     fetchPolicy: "network-only",
   });
@@ -45,4 +45,4 @@ const useMinimalOrders = (
   );
 };
 
-export default useMinimalOrders;
+export default useMinimalProducts;
