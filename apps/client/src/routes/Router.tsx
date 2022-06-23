@@ -2,6 +2,7 @@ import { Routes, Route } from "react-router-dom";
 import HomePage from "@client/routes/HomePage";
 import OrdersOverview from "@client/routes/OrdersOverview";
 import OrderDetails from "@client/routes/OrderDetails";
+import ProductsOverview from "@client/routes/ProductsOverview";
 
 const routes = [
   {
@@ -13,6 +14,11 @@ const routes = [
     id: "ordersOverview",
     path: "/orders",
     element: <OrdersOverview />,
+  },
+  {
+    id: "productsOverview",
+    path: "/products",
+    element: <ProductsOverview />,
   },
   {
     id: "orderDetails",

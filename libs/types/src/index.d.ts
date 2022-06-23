@@ -16,5 +16,6 @@ import Product from './lib/Product';
 import OrderDisplayFulfillmentStatus from './lib/OrderDisplayFulfillmentStatus';
 import ProductStatus from './lib/ProductStatus';
 
+import PriceRangeV2 from './lib/PriceRangeV2';
 
-export { PagedResult, LineItem, CustomAttribute, QueryMinimalOrder, QueryOrder, MinimalOrder, Order, QueryMinimalProduct, QueryProduct, MinimalProduct, Product, OrderDisplayFulfillmentStatus, ProductStatus }
+export { PagedResult, LineItem, CustomAttribute, QueryMinimalOrder, QueryOrder, MinimalOrder, Order, QueryMinimalProduct, QueryProduct, MinimalProduct, Product, OrderDisplayFulfillmentStatus, ProductStatus, PriceRangeV2 }

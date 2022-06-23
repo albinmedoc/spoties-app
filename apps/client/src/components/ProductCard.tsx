@@ -1,9 +1,9 @@
 import { Card, Thumbnail, Badge, TextStyle } from "@shopify/polaris";
 import { isUrl, isImageUrl } from "@shared/helpers";
-import type { Product, CustomAttribute } from '@types';
+import type { LineItem, CustomAttribute } from '@types';
 
 interface ProductCardProps {
-  product: Product;
+  product: LineItem;
 }
 
 export default function ProductCard(props: ProductCardProps) {

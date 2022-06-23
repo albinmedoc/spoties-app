@@ -6,7 +6,7 @@
 - [x] Manage tags for order
 
 
-- [ ] Create overview for products
+- [x] Create overview for products
 - [ ] Create detailed page for product
 - [ ] Create interactive UI for editing spoties-settings for product
 - [ ] Show stats on homepage

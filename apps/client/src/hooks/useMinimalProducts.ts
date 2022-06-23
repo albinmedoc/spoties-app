@@ -6,14 +6,15 @@ import type { PagedResult, QueryMinimalProduct, MinimalProduct } from "@types";
 
 interface Parameters {
   query?: string;
+  maxProducts?: number;
 }
 
 const useMinimalProducts = (
-  { query = "" }: Parameters = {},
+  { query = "", maxProducts = 20 }: Parameters = {},
   deps = []
 ) => {
   const { data, loading } = useQuery<{products: PagedResult<QueryMinimalProduct>}>(GET_MINIMAL_PRODUCTS_QUERY, {
-    variables: { query },
+    variables: { query, maxProducts },
     fetchPolicy: "network-only",
   });
 

@@ -5,9 +5,9 @@ import { ProductFields, PageInfoFields } from "../fragments";
 const GET_MINIMAL_PRODUCTS_QUERY = gql`
   ${ProductFields}
   ${PageInfoFields}
-  query GetProducts($query: String) {
+  query GetProducts($query: String, $maxProducts: Int) {
     products(
-      first: $maxOrders
+      first: $maxProducts
       query: $query
       sortKey: CREATED_AT
       reverse: true

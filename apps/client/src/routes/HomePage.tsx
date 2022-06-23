@@ -8,7 +8,10 @@ export default function HomePage() {
         <Layout.Section>
           <h2>Homepage</h2>
           <Link to="/orders" data-primary-link>
-            Overview
+            Orders Overview
+          </Link>
+          <Link to="/products" data-primary-link>
+            Products Overview
           </Link>
         </Layout.Section>
       </Layout>

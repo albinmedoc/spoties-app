@@ -3,7 +3,7 @@ import {
   Stack,
   RadioButton,
 } from "@shopify/polaris";
-import { useState, useCallback, useMemo } from "react";
+import { useState, useMemo } from "react";
 import { OrdersTable } from "@client/components";
 
 export default function OrdersOverview() {

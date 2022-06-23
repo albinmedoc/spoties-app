@@ -15,11 +15,11 @@ import type { NonEmptyArray } from "@shopify/polaris/build/ts/latest/src/types";
 import type { IndexTableHeading } from "@shopify/polaris/build/ts/latest/src/components/IndexTable";
 import type { MinimalOrder } from "@types";
 
-interface OrderTableProps {
+interface OrdersTableProps {
     query: string;
 }
 
-export default function OrdersTable(props: OrderTableProps) {
+export default function OrdersTable(props: OrdersTableProps) {
     const {
         orders,
         loading: tableLoading,

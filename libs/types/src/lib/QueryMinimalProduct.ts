@@ -1,4 +1,5 @@
 import ProductStatus from "./ProductStatus";
+import PriceRangeV2 from "./PriceRangeV2";
 
 export default interface QueryMinimalProduct {
     id: string;
@@ -6,14 +7,7 @@ export default interface QueryMinimalProduct {
         altText?: string;
         url: string;
     }
-    priceRangeV2: {
-        maxVariantPrice: {
-            amount: number;
-        }
-        minVariantPrice: {
-            amount: number;
-        }
-    }
+    priceRangeV2: PriceRangeV2;
     status: ProductStatus;
     title: string;
     totalVariants: number;
