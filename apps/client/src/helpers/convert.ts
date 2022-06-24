@@ -25,10 +25,4 @@ const convertQueryOrderToOrder = (queryOrder: QueryOrder): Order => ({
         .flat(),
 });
 
-const convertQueryProductToProduct = (queryProduct: QueryProduct): Product => ({
-    ...queryProduct,
-    maxPrice: queryProduct.priceRangeV2.maxVariantPrice.amount,
-    minPrice: queryProduct.priceRangeV2.minVariantPrice.amount,
-});
-
-export { convertQueryOrderToOrder, convertQueryProductToProduct }
+export { convertQueryOrderToOrder }

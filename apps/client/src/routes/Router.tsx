@@ -3,6 +3,7 @@ import HomePage from "@client/routes/HomePage";
 import OrdersOverview from "@client/routes/OrdersOverview";
 import OrderDetails from "@client/routes/OrderDetails";
 import ProductsOverview from "@client/routes/ProductsOverview";
+import ProductDetails from "@client/routes/ProductDetails";
 
 const routes = [
   {
@@ -16,14 +17,19 @@ const routes = [
     element: <OrdersOverview />,
   },
   {
+    id: "orderDetails",
+    path: "/orders/:id",
+    element: <OrderDetails />,
+  },
+  {
     id: "productsOverview",
     path: "/products",
     element: <ProductsOverview />,
   },
   {
-    id: "orderDetails",
-    path: "/orders/:id",
-    element: <OrderDetails />,
+    id: "productDetails",
+    path: "/products/:id",
+    element: <ProductDetails />,
   },
 ];
 

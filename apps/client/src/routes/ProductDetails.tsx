@@ -1,13 +1,12 @@
-import { Page, Spinner } from "@shopify/polaris";
+import { Card, Page, Spinner } from "@shopify/polaris";
 import { useParams } from "react-router-dom";
 import { useProduct } from "@client/hooks";
-import { generateShopifyOrderGid } from "@shared/helpers";
-import { OrderStatusBadge, LineItemCard, Tags } from "@client/components";
+import { generateShopifyProductGid } from "@shared/helpers";
 
 export default function ProductDetails() {
   const { id } = useParams();
   const { product, loading: productLoading } = useProduct({
-    id: generateShopifyOrderGid(id),
+    id: generateShopifyProductGid(id),
   });
 
   if (productLoading) {
@@ -19,7 +18,10 @@ export default function ProductDetails() {
       breadcrumbs={[{ content: "Products", url: "/products" }]}
       title={product.title}
     >
-      {product}
+      <Card>
+        {/* eslint-disable-next-line react/no-danger */}
+        <div dangerouslySetInnerHTML={{ __html: product.descriptionHtml }} />
+      </Card>
     </Page>
   );
 }

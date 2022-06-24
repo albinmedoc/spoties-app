@@ -1,9 +1,9 @@
 import { gql } from "@apollo/client";
-import { ProductFields, PageInfoFields } from "../fragments";
+import { MinimalProductFields, PageInfoFields } from "../fragments";
 
 
 const GET_MINIMAL_PRODUCTS_QUERY = gql`
-  ${ProductFields}
+  ${MinimalProductFields}
   ${PageInfoFields}
   query GetProducts($query: String, $maxProducts: Int) {
     products(
@@ -14,7 +14,7 @@ const GET_MINIMAL_PRODUCTS_QUERY = gql`
     ) {
       edges {
         node {
-          ...ProductFields
+          ...MinimalProductFields
         }
       }
       pageInfo {

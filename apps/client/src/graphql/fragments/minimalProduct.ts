@@ -1,7 +1,7 @@
 import { gql } from "@apollo/client";
 
 export default gql`
-    fragment ProductFields on Product {
+    fragment MinimalProductFields on Product {
         id
         featuredImage{
             altText
@@ -18,8 +18,5 @@ export default gql`
         status
         title
         totalVariants
-        descriptionHtml
-        handle
-        tags
     }
 `;

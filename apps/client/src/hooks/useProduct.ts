@@ -1,7 +1,6 @@
 import { useQuery } from "@apollo/react-hooks";
 import { useMemo } from "react";
 import { GET_PRODUCT_QUERY } from "@client/graphql";
-import { convertQueryProductToProduct } from '@client/helpers';
 import type { QueryProduct, Product } from '@types';
 
 interface Parameters {
@@ -19,7 +18,7 @@ const useProduct = ({ id }: Parameters) => {
       return null;
     }
 
-    return convertQueryProductToProduct(data.product);
+    return data.product;
   }, [data, loading]);
 
   return useMemo(() => ({ product, loading }), [product, loading]);
