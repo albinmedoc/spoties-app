@@ -11,7 +11,7 @@ export default gql`
         price
         product {
             id
-        };
+        }
         sku
     }
 `;
