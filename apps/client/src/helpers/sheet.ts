@@ -1,5 +1,5 @@
 import ExcelJS from "exceljs";
-import type { Order , Product} from '@types';
+import type { Order , LineItem} from '@types';
 import { isUrl } from "@shared/helpers";
 
 const generateWorkbookFromOrders = (orders: Order[]) => {
@@ -16,9 +16,9 @@ const generateWorkbookFromOrders = (orders: Order[]) => {
     { header: "Properties", key: "properties" },
   ];
 
-  const getCustomAttributes = (product: Product) => {
-    if (product && product.customAttributes) {
-      const attributes = product.customAttributes.reduce((result, attr) => {
+  const getCustomAttributes = (lineItem: LineItem) => {
+    if (lineItem && lineItem.customAttributes) {
+      const attributes = lineItem.customAttributes.reduce((result, attr) => {
         if (!isUrl(attr.value)) result.push(`${attr.key}: ${attr.value}`);
         return result;
       }, []);
@@ -30,7 +30,7 @@ const generateWorkbookFromOrders = (orders: Order[]) => {
   const products: Record<string, string>[] = [];
 
   orders.forEach((order) => {
-    order.products.forEach((product) => {
+    order.lineItems.forEach((product) => {
       products.push({
         id: order.name,
         createdAt: order.createdAt,
