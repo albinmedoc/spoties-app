@@ -1,7 +1,7 @@
 import { useQuery } from "@apollo/react-hooks";
 import { useMemo } from "react";
 import { GET_PRODUCT_QUERY } from "@client/graphql";
-import type { QueryProduct, Product, PagedResult, ProductVariant } from '@types';
+import type { QueryProduct, Product, ProductVariant, NodeConnection } from '@types';
 import { getNodesFromConnections } from "@client/utilities/graphql";
 
 interface Parameters {
@@ -9,7 +9,7 @@ interface Parameters {
 }
 
 const useProduct = ({ id }: Parameters) => {
-  const { data, loading } = useQuery<{ product: QueryProduct, productVariants: PagedResult<ProductVariant> }>(GET_PRODUCT_QUERY, {
+  const { data, loading } = useQuery<{ product: QueryProduct, productVariants: NodeConnection<ProductVariant> }>(GET_PRODUCT_QUERY, {
     variables: { id, maxProductVariants: 100, productVariantsQuery: `product_id=${id}` },
     fetchPolicy: "network-only",
   });

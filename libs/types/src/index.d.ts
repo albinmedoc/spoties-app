@@ -1,4 +1,5 @@
-import { PagedResult } from './lib/PagedResult';
+import NodeConnection from './lib/NodeConnection';
+import PagedResult from './lib/PagedResult';
 
 import LineItem from './lib/LineItem';
 import CustomAttribute from './lib/CustomAttribute';
@@ -21,4 +22,4 @@ import ProductStatus from './lib/ProductStatus';
 
 import PriceRangeV2 from './lib/PriceRangeV2';
 
-export { PagedResult, LineItem, CustomAttribute, QueryMinimalOrder, QueryOrder, MinimalOrder, Order, QueryMinimalProduct, QueryProduct, MinimalProduct, Product, QueryProductVariant, ProductVariant, OrderDisplayFulfillmentStatus, ProductStatus, PriceRangeV2 }
+export { NodeConnection, PagedResult, LineItem, CustomAttribute, QueryMinimalOrder, QueryOrder, MinimalOrder, Order, QueryMinimalProduct, QueryProduct, MinimalProduct, Product, QueryProductVariant, ProductVariant, OrderDisplayFulfillmentStatus, ProductStatus, PriceRangeV2 }

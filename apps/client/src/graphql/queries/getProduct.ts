@@ -18,9 +18,6 @@ const GET_PRODUCT_QUERY = gql`
           ...ProductVariantFields
         }
       }
-      pageInfo {
-        ...PageInfoFields
-      }
     }
   }
 `;

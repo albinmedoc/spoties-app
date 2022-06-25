@@ -1,5 +1,6 @@
-export interface PagedResult<T> {
-    edges: {node: T}[];
+import type NodeConnection from './NodeConnection';
+
+interface PagedResult<T> extends NodeConnection<T> {
     pageInfo: {
         endCursor?: string;
         hasNextPage?: boolean;
@@ -7,3 +8,5 @@ export interface PagedResult<T> {
         hasPreviousPage?: boolean;
     }
 }
+
+export default PagedResult;
