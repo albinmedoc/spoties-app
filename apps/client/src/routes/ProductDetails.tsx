@@ -9,6 +9,9 @@ export default function ProductDetails() {
     id: generateShopifyProductGid(id),
   });
 
+  // eslint-disable-next-line no-console
+  console.log(product);
+
   if (productLoading) {
     return <Spinner accessibilityLabel="Loading order" />;
   }
