@@ -21,7 +21,7 @@ interface OrdersTableProps {
 
 export default function OrdersTable(props: OrdersTableProps) {
     const {
-        orders,
+        orders: minimalOrders,
         loading: tableLoading,
         previousCursor,
         nextCursor,
@@ -32,13 +32,13 @@ export default function OrdersTable(props: OrdersTableProps) {
         [props.query]
     );
 
-    const [loadSelectedOrders, { orders: selectedOrders }] = useOrdersByIdLazy();
+    const [loadSelectedOrders] = useOrdersByIdLazy();
 
     const { selectedResources: selectedOrderIds, allResourcesSelected: allOrdersSelected, handleSelectionChange } =
-        useIndexResourceState(orders as Array<MinimalOrder & {[key: string]: unknown}>);
+        useIndexResourceState(minimalOrders as Array<MinimalOrder & {[key: string]: unknown}>);
 
-    const exportOrders = (exportFormat: 'CSV' | 'EXCEL') => loadSelectedOrders({variables: { ids: selectedOrderIds }})
-        .then(() => generateWorkbookFromOrders(selectedOrders))
+    const exportOrders = (exportFormat: 'CSV' | 'EXCEL') => loadSelectedOrders({ ids: selectedOrderIds })
+        .then((orders) => generateWorkbookFromOrders(orders))
         .then((workbook) => exportFormat === 'EXCEL' ? workbook.xlsx.writeBuffer() : workbook.csv.writeBuffer())
         .then((buffer) => {
             const exportDate = dayjs().format('YYYY-MM-DD');
@@ -80,7 +80,7 @@ export default function OrdersTable(props: OrdersTableProps) {
         plural: "orders",
     };
 
-    const rowMarkup = orders.map((order, index) => (
+    const rowMarkup = minimalOrders.map((order, index) => (
         <IndexTable.Row
             id={order.id}
             key={order.id}
@@ -110,7 +110,7 @@ export default function OrdersTable(props: OrdersTableProps) {
             <IndexTable
                 loading={tableLoading}
                 resourceName={resourceName}
-                itemCount={orders.length}
+                itemCount={minimalOrders.length}
                 selectedItemsCount={
                     allOrdersSelected ? "All" : selectedOrderIds.length
                 }

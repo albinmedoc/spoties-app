@@ -2,8 +2,6 @@ import { useLazyQuery } from "@apollo/client";
 import { useMemo } from "react";
 import { GET_ORDERS_BY_ID_QUERY } from "@client/graphql";
 import { convertQueryOrderToOrder } from '@client/helpers';
-
-import type { LazyQueryExecFunction } from "@apollo/client";
 import type { QueryOrder, Order } from "@types";
 
 interface Variables {
@@ -12,7 +10,7 @@ interface Variables {
 }
 
 const useOrdersByIdLazy = (): [
-  LazyQueryExecFunction<{ nodes: QueryOrder[] }, Variables>,
+  (variables: Variables) => Promise<Order[]>,
   {
     orders: Order[];
     loading: boolean;
@@ -22,15 +20,19 @@ const useOrdersByIdLazy = (): [
     fetchPolicy: "network-only",
   });
 
+  const convertQueryDataToOrders = (queryData: { nodes: QueryOrder[] }) => queryData.nodes.map((order) => convertQueryOrderToOrder(order))
+
   const orders: Order[] = useMemo(() => {
     if (loading || !data) {
       return [];
     }
 
-    return data.nodes.map((order) => convertQueryOrderToOrder(order));
+    return convertQueryDataToOrders(data);
   }, [loading, data]);
 
-  return [trigger, { orders, loading }];
+  const loadOrders = useMemo(() => (variables: Variables) => trigger({variables}).then((queryResult) => convertQueryDataToOrders(queryResult.data)), [trigger]);
+
+  return [loadOrders, { orders, loading }];
 };
 
 export default useOrdersByIdLazy;

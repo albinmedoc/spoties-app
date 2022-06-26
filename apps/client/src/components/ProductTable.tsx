@@ -22,7 +22,7 @@ interface ProductsTableProps {
 
 export default function ProductsTable(props: ProductsTableProps) {
     const {
-        products,
+        products: minimalProducts,
         loading: tableLoading,
         previousCursor,
         nextCursor,
@@ -33,20 +33,17 @@ export default function ProductsTable(props: ProductsTableProps) {
         [props.query]
     );
 
-    const [loadSelectedProducts, { products: selectedProducts }] = useProductsByIdLazy();
+    const [loadSelectedProducts] = useProductsByIdLazy();
 
     const { selectedResources: selectedProductIds, allResourcesSelected: allOrdersSelected, handleSelectionChange } =
-        useIndexResourceState(products as Array<MinimalProduct & { [key: string]: unknown }>);
+        useIndexResourceState(minimalProducts as Array<MinimalProduct & { [key: string]: unknown }>);
 
     const exportProducts = (exportFormat: 'CSV' | 'EXCEL') =>
         loadSelectedProducts({
-            variables: {
-                ids: selectedProductIds,
-                productVariantsQuery: selectedProductIds.map((id) => `product_id=${id}`).join(' OR '),
-                maxProductVariants: products.filter((p) => selectedProductIds.includes(p.id)).map((p) => p.totalVariants).reduce((a, b) => a + b, 0)
-            }
+            ids: selectedProductIds,
+            maxProductVariants: minimalProducts.filter((p) => selectedProductIds.includes(p.id)).map((p) => p.totalVariants).reduce((a, b) => a + b, 0)
         })
-            .then(() => generateWorkbookFromProducts(selectedProducts))
+            .then((products) => generateWorkbookFromProducts(products))
             .then((workbook) => exportFormat === 'EXCEL' ? workbook.xlsx.writeBuffer() : workbook.csv.writeBuffer())
             .then((buffer) => {
                 const exportDate = dayjs().format('YYYY-MM-DD');
@@ -95,7 +92,7 @@ export default function ProductsTable(props: ProductsTableProps) {
         return `${priceRange.minVariantPrice.amount} - ${priceRange.maxVariantPrice.amount}`
     }
 
-    const rowMarkup = products.map((product, index) => (
+    const rowMarkup = minimalProducts.map((product, index) => (
         <IndexTable.Row
             id={product.id}
             key={product.id}
@@ -133,7 +130,7 @@ export default function ProductsTable(props: ProductsTableProps) {
             <IndexTable
                 loading={tableLoading}
                 resourceName={resourceName}
-                itemCount={products.length}
+                itemCount={minimalProducts.length}
                 selectedItemsCount={
                     allOrdersSelected ? "All" : selectedProductIds.length
                 }
