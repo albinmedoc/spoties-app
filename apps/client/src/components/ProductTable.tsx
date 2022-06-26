@@ -7,11 +7,14 @@ import {
     Thumbnail,
 } from "@shopify/polaris";
 import { Link } from "react-router-dom";
-import { useMinimalProducts } from "@client/hooks";
+import { useMinimalProducts, useProductsByIdLazy } from "@client/hooks";
 import { extractIdFromGid } from "@shared/helpers";
 import type { NonEmptyArray } from "@shopify/polaris/build/ts/latest/src/types";
 import type { IndexTableHeading } from "@shopify/polaris/build/ts/latest/src/components/IndexTable";
 import type { MinimalProduct, PriceRangeV2 } from "@types";
+import { generateWorkbookFromProducts } from "@client/helpers";
+import dayjs from "dayjs";
+import saveAs from "file-saver";
 
 interface ProductsTableProps {
     query: string;
@@ -30,8 +33,47 @@ export default function ProductsTable(props: ProductsTableProps) {
         [props.query]
     );
 
+    const [loadSelectedProducts, { products: selectedProducts }] = useProductsByIdLazy();
+
     const { selectedResources: selectedProductIds, allResourcesSelected: allOrdersSelected, handleSelectionChange } =
         useIndexResourceState(products as Array<MinimalProduct & { [key: string]: unknown }>);
+
+    const exportProducts = (exportFormat: 'CSV' | 'EXCEL') =>
+        loadSelectedProducts({
+            variables: {
+                ids: selectedProductIds,
+                productVariantsQuery: selectedProductIds.map((id) => `product_id=${id}`).join(' OR '),
+                maxProductVariants: products.filter((p) => selectedProductIds.includes(p.id)).map((p) => p.totalVariants).reduce((a, b) => a + b, 0)
+            }
+        })
+            .then(() => generateWorkbookFromProducts(selectedProducts))
+            .then((workbook) => exportFormat === 'EXCEL' ? workbook.xlsx.writeBuffer() : workbook.csv.writeBuffer())
+            .then((buffer) => {
+                const exportDate = dayjs().format('YYYY-MM-DD');
+                const extension = exportFormat === 'EXCEL' ? 'xlsx' : 'csv';
+                const filename = `Product_Export_${exportDate}.${extension}`;
+                saveAs(new Blob([buffer]), filename);
+            });
+
+    const promotedBulkActions = [
+        {
+            title: "Export",
+            actions: [
+                {
+                    content: "Export as CSV",
+                    onAction: () => {
+                        exportProducts('CSV')
+                    },
+                },
+                {
+                    content: "Export as Excel",
+                    onAction: () => {
+                        exportProducts('EXCEL')
+                    },
+                },
+            ],
+        },
+    ];
 
     const headings: NonEmptyArray<IndexTableHeading> = [
         { title: "" },
@@ -96,6 +138,7 @@ export default function ProductsTable(props: ProductsTableProps) {
                     allOrdersSelected ? "All" : selectedProductIds.length
                 }
                 onSelectionChange={handleSelectionChange}
+                promotedBulkActions={promotedBulkActions}
                 headings={headings}
             >
                 {rowMarkup}
