@@ -1,10 +1,9 @@
 import { gql } from "@apollo/client";
-import { ProductFields, ProductVariantFields, PageInfoFields } from "../fragments";
+import { ProductFields, ProductVariantFields } from "../fragments";
 
 const GET_PRODUCT_QUERY = gql`
   ${ProductFields}
   ${ProductVariantFields}
-  ${PageInfoFields}
   query GetProduct($id: ID!, $maxProductVariants: Int!, $productVariantsQuery: String) {
     product(id: $id) {
       ...ProductFields
