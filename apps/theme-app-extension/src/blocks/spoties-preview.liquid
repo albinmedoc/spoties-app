@@ -1,0 +1,78 @@
+{{ 'spoties-fields.css' | asset_url | stylesheet_tag }}
+{{ 'modal.css' | asset_url | stylesheet_tag }}
+
+<spoties-preview
+    settings='{{ product.metafields.spoties.preview.value.settings | json }}'
+    templateImages='{{ product.metafields.spoties.preview.value.templateImages | json }}'
+    selectedVariant='{{ product.selected_or_first_available_variant.id }}'
+    defaultRecordName='{{ block.settings.record_name }}'
+    defaultArtistName='{{ block.settings.artist_name }}'
+    defaultCoverImage='{{ block.settings.cover_image | image_url }}'
+    defaultSpotifyUri='{{ block.settings.spotify_uri }}'
+    {{ block.shopify_attributes }}
+>
+    <div class="spoties__option">
+        <div>
+            <spoties-modal-opener class="product-popup-modal__opener no-js-hidden" data-modal="#SpotiesModal-Preview">
+                <label role="button" aria-haspopup="dialog" open>Förhandsvisa produkt</label>
+            </spoties-modal-opener>
+        </div>
+    </div>
+    <spoties-modal-dialog id="SpotiesModal-Preview">
+        <div role="dialog" aria-label="Förhandsvisning av omslagsbild" aria-modal="true" tabindex="-1">
+            <button type="button" aria-label="{{ 'accessibility.close' | t }}" close>
+                <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" role="presentation" class="icon icon-close" fill="none" viewBox="0 0 18 17">
+                    <path d="M.865 15.978a.5.5 0 00.707.707l7.433-7.431 7.579 7.282a.501.501 0 00.846-.37.5.5 0 00-.153-.351L9.712 8.546l7.417-7.416a.5.5 0 10-.707-.708L8.991 7.853 1.413.573a.5.5 0 10-.693.72l7.563 7.268-7.418 7.417z" fill="currentColor">
+                </svg>
+            </button>
+            <div>
+                <img loading="lazy" crossorigin="anonymous">
+            </div>
+            <p>* Observera att detta endast är en förhandsvisning och vissa skillnader kan förekomma.</p>
+        </div>
+    </spoties-modal-dialog>
+</spoties-preview>
+
+<script src="{{ 'modal.js' | asset_url }}" defer></script>
+<script src="{{ 'spoties-fields.js' | asset_url }}" defer></script>
+
+{% schema %}
+{
+  "name": "t:blocks.spoties-preview.name",
+  "templates": [
+    "product"
+  ],
+  "target": "section",
+  "settings": [
+    {
+      "id": "product",
+      "type": "product",
+      "label": "t:blocks.spoties-fields.settings.product.label",
+      "autofill": true
+    },
+    {
+      "type": "text",
+      "id": "record_name",
+      "default": "Record name",
+      "label": "t:blocks.spoties-fields.settings.record-name.label"
+    },
+    {
+      "type": "text",
+      "id": "artist_name",
+      "default": "Artist name",
+      "label": "t:blocks.spoties-fields.settings.artist-name.label"
+    },
+    {
+      "type": "image_picker",
+      "id": "cover_image",
+      "label": "t:blocks.spoties-fields.settings.cover-image.label"
+    },
+    {
+      "type": "text",
+      "id": "spotify_uri",
+      "default": "spotify:track:4lhqb6JvbHId48OUJGwymk",
+      "label": "t:blocks.spoties-fields.settings.spoties-uri.label"
+    }
+  ]
+}
+{% endschema %}

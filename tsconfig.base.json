@@ -19,6 +19,7 @@
       "@backend/*": ["apps/backend/src/*"],
       "@client/*": ["apps/client/src/*"],
       "@shared/*": ["libs/shared/src/*"],
+      "@spoties-app/my-new-app": ["libs/my-new-app/src/index.ts"],
       "@types": ["libs/types/src/index.d.ts"]
     }
   },

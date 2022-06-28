@@ -1,0 +1,18 @@
+{
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "apps/theme-app-extension/src",
+  "projectType": "application",
+  "targets": {
+    "build": {
+      "executor": "@nrwl/node:webpack",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "main": "apps/theme-app-extension/src/script/main.ts",
+        "outputPath": "dist/theme-app-extension/assets",
+        "tsConfig": "apps/theme-app-extension/tsconfig.json",
+        "webpackConfig": "apps/theme-app-extension/webpack.config.js"
+      }
+    }
+  },
+  "tags": []
+}

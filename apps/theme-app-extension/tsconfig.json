@@ -1,8 +1,8 @@
 {
   "extends": "../../tsconfig.base.json",
   "compilerOptions": {
-    "outDir": "../../dist/backend",
-    "resolveJsonModule": true
+    "outDir": "../../dist/theme-app-extension",
+    "resolveJsonModule": true,
   },
   "exclude": ["jest.config.ts", "**/*.spec.ts", "**/*.test.ts"],
   "include": ["**/*.ts"]

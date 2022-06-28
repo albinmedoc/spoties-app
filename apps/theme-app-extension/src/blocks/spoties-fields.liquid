@@ -1,0 +1,130 @@
+{{ 'spoties-fields.css' | asset_url | stylesheet_tag }}
+{{ 'modal.css' | asset_url | stylesheet_tag }}
+
+<spoties-fields class="spoties__fields">
+  {%- for option in block.settings.product.metafields.spoties.options.value -%}
+      {%- case option.type -%}
+      {%- when 'search' -%}
+          {% render 'spoties-search-field' product: block.settings.product, required: option.required %}
+      {%- when 'cover-image' -%}
+          {% render 'spoties-cover-field' product: block.settings.product %}
+      {%- when 'record-name' -%}
+          <spoties-record-name-field>
+              <div class="spoties__option">
+                  <label for="spoties-record">Låtnamn</label>
+                  <input
+                      type="text"
+                      id="spoties-record"
+                      name="properties[Record name]"
+                      {% if option.minlength %}
+                          minlength="{{ option.minlength }}"
+                      {% endif %}
+                      {% if option.maxlength %}
+                          maxlength="{{ option.maxlength }}"
+                      {% endif %}
+                      {% if option.pattern %}
+                          pattern="{{ option.pattern }}"
+                      {% endif %}
+                      {% if option.required %}
+                          required
+                      {% endif %}
+                  >
+                  <spoties-option-errors></spoties-option-errors>
+              </div>
+          </spoties-record-name-field>
+      {%- when 'artist-name' -%}
+          <spoties-artist-field
+              {% if option.minlength %}
+                  minlength="{{ option.minlength }}"
+              {% endif %}
+              {% if option.maxlength %}
+                  maxlength="{{ option.maxlength }}"
+              {% endif %}
+              {% if option.minlength %}
+                  minlength="{{ option.minlength }}"
+              {% endif %}
+              {% if option.maxlength %}
+                  maxlength="{{ option.maxlength }}"
+              {% endif %}
+              {% if option.pattern %}
+                  pattern="{{ option.pattern }}"
+              {% endif %}
+              {% if option.required %}
+                  required
+              {% endif %}
+          >
+              <div class="spoties__option">
+                  <label for="spoties-artist">Artistnamn</label>
+                  <input
+                      type="text"
+                      id="spoties-artist"
+                      name="properties[Artist name]"
+                  >
+                  <spoties-option-errors></spoties-option-errors>
+              </div>
+          </spoties-artist-field>
+      {%- when 'text' -%}
+          <spoties-text-field>
+              <div class="spoties__option">
+                  <label for="spoties-{{ option.id }}">{{ option.label }}</label>
+                  <input
+                      type="text"
+                      id="spoties-{{ option.id }}"
+                      name="properties[{{ option.name }}]"
+                      {% if option.minlength %}
+                          minlength="{{ option.minlength }}"
+                      {% endif %}
+                      {% if option.maxlength %}
+                          maxlength="{{ option.maxlength }}"
+                      {% endif %}
+                      {% if option.pattern %}
+                          pattern="{{ option.pattern }}"
+                      {% endif %}
+                      {% if option.required %}
+                          required
+                      {% endif %}
+                  >
+                  <spoties-option-errors></spoties-option-errors>
+              </div>
+          </spoties-text-field>
+      {%- when 'option' -%}
+          <spoties-option-field>
+              <fieldset class="js product-form__input">
+                  <label class="spoties__label">{{ option.label }}</label>
+                  {%- for value in option.values -%}
+                      <input type="radio" id="{{ section.id }}-spoties-option-{{ forloop.index0 }}"
+                          name="properties[{{ option.name }}]"
+                          value="{{ value | escape }}"
+                          {% if option.selected_value == value %}checked{% endif %}
+                      >
+                      <label for="{{ section.id }}-spoties-option-{{ forloop.index0 }}">
+                          {{ value }}
+                      </label>
+                  {%- endfor -%}
+              </fieldset>
+          </spoties-option-field>
+      {%- endcase -%}
+  {%- endfor -%}
+</spoties-fields>
+
+<script src="{{ 'cropper.min.js' | asset_url }}" defer></script>
+<script src="{{ 'modal.js' | asset_url }}" defer></script>
+<script src="{{ 'spoties-fields.js' | asset_url }}" defer></script>
+
+{% schema %}
+{
+  "name": "t:blocks.spoties-fields.name",
+  "templates": [
+    "product"
+  ],
+  "target": "section",
+  "settings": [
+    {
+      "id": "product",
+      "type": "product",
+      "label": "t:blocks.spoties-fields.settings.product.label",
+      "autofill": true
+    }
+  ]
+}
+{% endschema %}
