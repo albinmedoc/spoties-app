@@ -22,4 +22,7 @@ import ProductStatus from './lib/ProductStatus';
 
 import PriceRangeV2 from './lib/PriceRangeV2';
 
+import { SpotiesFieldType, SpotiesSearchSettings, SpotiesCoverImageSettings, SpotiesTextSettings, SpotiesRecordNameSettings, SpotiesArtistNameSettings, SpotiesFieldSettings, SpotiesSettings } from './lib/SpotiesFields';
+
 export { NodeConnection, PagedResult, LineItem, CustomAttribute, QueryMinimalOrder, QueryOrder, MinimalOrder, Order, QueryMinimalProduct, QueryProduct, MinimalProduct, Product, QueryProductVariant, ProductVariant, OrderDisplayFulfillmentStatus, ProductStatus, PriceRangeV2 }
+export { SpotiesFieldType, SpotiesSearchSettings, SpotiesCoverImageSettings, SpotiesTextSettings, SpotiesRecordNameSettings, SpotiesArtistNameSettings, SpotiesFieldSettings, SpotiesSettings };

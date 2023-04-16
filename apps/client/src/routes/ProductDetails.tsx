@@ -2,6 +2,7 @@ import { Card, Page, Spinner } from "@shopify/polaris";
 import { useParams } from "react-router-dom";
 import { useProduct } from "@client/hooks";
 import { generateShopifyProductGid } from "@shared/helpers";
+import SpotiesFields from "@client/components/SpotiesFields";
 
 export default function ProductDetails() {
   const { id } = useParams();
@@ -22,8 +23,13 @@ export default function ProductDetails() {
       title={product.title}
     >
       <Card>
-        {/* eslint-disable-next-line react/no-danger */}
-        <div dangerouslySetInnerHTML={{ __html: product.descriptionHtml }} />
+        <Card.Section>
+          {/* eslint-disable-next-line react/no-danger */}
+          <div dangerouslySetInnerHTML={{ __html: product.descriptionHtml }} />
+        </Card.Section>
+        <Card.Section>
+          <SpotiesFields settings={[]}/>
+        </Card.Section>
       </Card>
     </Page>
   );

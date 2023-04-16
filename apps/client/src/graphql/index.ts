@@ -1,5 +1,5 @@
 import { GET_ORDER_QUERY, GET_MINIMAL_ORDERS_QUERY, GET_ORDERS_BY_ID_QUERY, GET_MINIMAL_PRODUCTS_QUERY, GET_PRODUCT_QUERY, GET_PRODUCTS_BY_ID_QUERY } from "./queries";
-import { UPDATE_ORDER_QUERY } from "./mutations";
+import { UPDATE_ORDER_QUERY, UPDATE_PRODUCT_QUERY } from "./mutations";
 
 /**
  * Queries
@@ -12,4 +12,4 @@ export { GET_ORDER_QUERY, GET_MINIMAL_ORDERS_QUERY, GET_ORDERS_BY_ID_QUERY, GET_
  * Further info: https://shopify.dev/concepts/graphql/mutations
  */
 
-export { UPDATE_ORDER_QUERY };
+export { UPDATE_ORDER_QUERY, UPDATE_PRODUCT_QUERY };

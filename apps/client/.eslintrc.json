@@ -10,6 +10,7 @@
         "react/destructuring-assignment": "off",
         "react-hooks/exhaustive-deps": "warn",
         "react/jsx-props-no-spreading": "off",
+        "react/require-default-props": "off",
         "no-console": [ "error",
           {"allow": ["warn", "error"]}
         ]
